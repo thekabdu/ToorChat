@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab2"
+    app:startDestination="@id/item_chat">
+
+    <fragment
+        android:id="@+id/item_chat"
+        android:name="kz.diaspora.app.ui.chats.ChatFragment"
+        android:label="@string/messages"
+        tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/toMessages"
+            app:destination="@id/item_messages" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_messages"
+        android:name="kz.diaspora.app.ui.messages.MessagesFragment"
+        android:label="Чат"
+        tools:layout="@layout/fragment_messages">
+
+        <argument
+            android:name="model"
+            app:argType="kz.diaspora.app.domain.model.ChatModel" />
+    </fragment>
+</navigation>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="kz.diaspora.app.domain.model.CategoryModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="148dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:cardCornerRadius="6dp"
+        android:layout_margin="8dp"
+        android:layout_height="50dp">
+
+        <ImageView
+            app:image_url="@{item.image_path}"
+            android:src="@drawable/ic_category_tickets"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{item.category_name}"
+            android:gravity="center"
+            android:background="@color/black_transparent"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="Lorem ipsum" />
+
+    </androidx.cardview.widget.CardView>
+</layout>

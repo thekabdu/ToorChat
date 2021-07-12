@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab4"
+    app:startDestination="@id/item_profile">
+
+    <fragment
+        android:id="@+id/item_profile"
+        android:name="kz.diaspora.app.ui.profile.ProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/to_my_adverts"
+            app:destination="@+id/item_my_adverts" />
+        <action
+            android:id="@+id/to_create_advert"
+            app:destination="@+id/item_create_advert" />
+        <action
+            android:id="@+id/to_edit_profile"
+            app:destination="@+id/item_edit_profile" />
+        <action
+            android:id="@+id/to_location_country"
+            app:destination="@id/item_location_country" />
+        <action
+            android:id="@+id/toLocationCountryFrom"
+            app:destination="@id/item_from_country" />
+    </fragment>
+
+    <activity
+        android:id="@+id/item_my_adverts"
+        android:name="kz.diaspora.app.ui.my_adverts.MyAdvertsActivity"
+        tools:layout="@layout/fragment_my_adverts">
+        <argument
+            android:name="my_advert_type"
+            app:argType="kz.diaspora.app.ui.my_adverts.MyAdvertType" />
+    </activity>
+
+    <activity
+        android:id="@+id/item_create_advert"
+        android:name="kz.diaspora.app.ui.edit_advert.CreateAdvertActivity"
+        tools:layout="@layout/fragment_edit_advert">
+
+    </activity>
+
+    <activity
+        android:id="@+id/item_edit_profile"
+        android:name="kz.diaspora.app.ui.edit_profile.EditProfileActivity"
+        tools:layout="@layout/fragment_edit_profile">
+
+    </activity>
+
+    <fragment
+        android:id="@+id/item_location_country"
+        android:name="kz.diaspora.app.ui.location.LocationCountryFragment"
+        android:label="fragment_location_country"
+        tools:layout="@layout/fragment_location_country" >
+        <action
+            android:id="@+id/to_location_city"
+            app:destination="@id/item_location_city" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_location_city"
+        android:name="kz.diaspora.app.ui.location.LocationCityFragment"
+        android:label="fragment_location_city"
+        tools:layout="@layout/fragment_location_city" >
+        <action
+            android:id="@+id/to_profile"
+            app:destination="@id/item_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_from_country"
+        android:name="kz.diaspora.app.ui.location_from.LocationFromCountryFragment"
+        android:label="LocationFromCountryFragment"
+        tools:layout="@layout/fragment_location_from_country">
+
+        <action
+            android:id="@+id/toLocationCityFrom"
+            app:destination="@id/item_from_city" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_from_city"
+        android:name="kz.diaspora.app.ui.location_from.LocationFromCityFragment"
+        android:label="LocationFromCityFragment"
+        tools:layout="@layout/fragment_location_from_city">
+        <action
+            android:id="@+id/toProfile"
+            app:destination="@id/item_profile" />
+    </fragment>
+
+</navigation>

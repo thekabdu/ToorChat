@@ -1,0 +1,168 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorEdgeEffect">@color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--        <item name="spinnerStyle">@style/Widget.App.Spinner</item>-->
+        <!--        <item name="android:spinnerStyle">@style/Widget.App.Spinner</item>-->
+        <item name="android:editTextStyle">@style/EditTextDefault</item>
+        <item name="android:textViewStyle">@style/TextViewDefault</item>
+        <item name="android:buttonStyle">@style/ButtonDefault</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+    </style>
+
+    <style name="Button.Whatsapp" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/whatsapp_color</item>
+    </style>
+
+    <style name="AppTheme.Welcome" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/background</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" >
+        <item name="android:actionBarDivider">@null</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- TextView -->
+    <style name="TextViewDefault" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <!-- EditText -->
+    <style name="EditTextDefault" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@drawable/background_edittext</item>
+    </style>
+
+    <style name="EditTextAddComment" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textColorHint">@color/color_7A7A7A</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@drawable/edittext_rounded_grey</item>
+    </style>
+
+    <!-- Buttons -->
+    <style name="ButtonDefault" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonBlack" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="backgroundTint">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonSignIn" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonWhite" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="ButtonYellow" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="backgroundTint">#FFC700</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="ButtonAdvertDetails" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="backgroundTint">@color/color_413E3E</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonAdvertsMenu" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="drawableRightCompat">@drawable/ic_arrow_right_grey</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="strokeColor">@color/color_D5C9C9</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonText" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">5dp</item>
+        <item name="strokeColor">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonTextSignIn" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Spinner -->
+    <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="overlapAnchor">true</item>
+        <item name="android:background">@drawable/background_spinner</item>
+    </style>
+
+    <!-- BottomSheet -->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_rounded</item>
+    </style>
+
+    <!-- AlertDialog -->
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">#fff</item>
+    </style>
+
+    <!--    Toolbar-->
+    <style name="ToolBarStyle" />
+
+    <style name="ToolBarStyle.Centered" parent="ToolBarStyle">
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
+    </style>
+
+    <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!--Any text styling can be done here-->
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

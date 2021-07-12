@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adverts"
+    app:startDestination="@id/item_my_adverts">
+
+    <fragment
+        android:id="@+id/item_my_adverts"
+        android:name="kz.diaspora.app.ui.my_adverts.MyAdvertsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_my_adverts">
+
+        <argument
+            android:name="my_advert_type"
+            app:argType="kz.diaspora.app.ui.my_adverts.MyAdvertType" />
+
+        <action
+            android:id="@+id/to_edit_advert"
+            app:destination="@+id/item_edit_post" />
+        <action
+            android:id="@+id/to_detail"
+            app:destination="@id/detailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_edit_post"
+        android:name="kz.diaspora.app.ui.edit_post.EditPostFragment"
+        android:label="@string/edit"
+        tools:layout="@layout/fragment_edit_post">
+
+        <argument
+            android:name="post_model"
+            app:argType="kz.diaspora.app.domain.model.PostModel"/>
+
+        <argument
+            android:name="my_advert_type"
+            app:argType="kz.diaspora.app.ui.my_adverts.MyAdvertType" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="kz.diaspora.app.ui.feed.DetailFragment"
+        android:label="@string/adverts"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="model"
+            app:argType="kz.diaspora.app.domain.model.PostModel"/>
+    </fragment>
+
+</navigation>

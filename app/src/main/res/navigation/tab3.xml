@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab3"
+    app:startDestination="@id/item_notifications">
+
+    <fragment
+        android:id="@+id/item_notifications"
+        android:name="kz.diaspora.app.ui.notifications.NotificationsFragment"
+        android:label="@string/whats_new_"
+        tools:layout="@layout/fragment_notifications">
+
+        <action
+            android:id="@+id/toDetailPost"
+            app:destination="@id/detailFragment" />
+
+        <action
+            android:id="@+id/toProfileInfo"
+            app:destination="@id/item_profile_info" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="kz.diaspora.app.ui.feed.DetailFragment"
+        android:label="@string/detail_post"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="model"
+            app:argType="kz.diaspora.app.domain.model.PostModel" />
+        <action
+            android:id="@+id/toProfileInfo"
+            app:destination="@id/item_profile_info" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_profile_info"
+        android:name="kz.diaspora.app.ui.profile_info.ProfileInfoFragment"
+        android:label="@string/fragment_profile_info"
+        tools:layout="@layout/fragment_profile_info">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

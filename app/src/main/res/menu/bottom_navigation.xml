@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab1"
+        android:icon="@drawable/ic_paper"
+        android:contentDescription="@string/feed"
+        android:title="@string/feed" />
+    <item
+        android:id="@+id/tab2"
+        android:icon="@drawable/ic_message"
+        android:contentDescription="@string/message"
+        android:title="@string/message" />
+    <item
+        android:id="@+id/tab3"
+        android:icon="@drawable/ic_comment"
+        android:contentDescription="@string/comment"
+        android:title="@string/comment" />
+    <item
+        android:id="@+id/tab4"
+        android:icon="@drawable/ic_profile"
+        android:contentDescription="@string/profile"
+        android:title="@string/profile" />
+</menu>

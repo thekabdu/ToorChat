@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="kz.diaspora.app.domain.model.PostModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="16dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:id="@+id/cv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_author"
+                    image_url_circle="@{item.user_image}"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@color/color_F3F3F3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{item.name}"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_location"
+                    app:layout_constraintStart_toEndOf="@+id/iv_author"
+                    app:layout_constraintTop_toTopOf="@+id/iv_author"
+                    tools:text="avtosalon_mersedes" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{item.date}"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_author"
+                    app:layout_constraintStart_toEndOf="@+id/iv_author"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_author"
+                    tools:text="avtosalon_mersedes" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:textStyle="bold"
+            android:text="@{item.title}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_author"
+            tools:text="Мировая премьера нового Mercedes-Maybach S-Class" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:text="@{item.description}"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+
+        <ImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/color_F3F3F3"
+            app:image_url="@{item.post_image}"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+
+        <ImageView
+            android:id="@+id/iv_comment"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="9dp"
+            android:src="@drawable/ic_comment_pop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="9dp"
+            android:src="@drawable/ic_like"
+            app:layout_constraintStart_toEndOf="@id/tv_count"
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.comments_count}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_comment"
+            app:layout_constraintStart_toEndOf="@+id/iv_comment"
+            app:layout_constraintTop_toTopOf="@+id/iv_comment" />
+
+        <ImageView
+            android:id="@+id/iv_bookmark"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="9dp"
+            android:src="@drawable/ic_eye"
+            app:layout_constraintEnd_toStartOf="@+id/tv_views"
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+
+        <TextView
+            android:id="@+id/tv_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{item.seen}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_bookmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_bookmark" />
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CECECE"
+            app:layout_constraintTop_toBottomOf="@+id/iv_like" />
+
+        <ImageView
+            android:id="@+id/iv_comment_author"
+            image_url_circle=""
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_line" />
+
+        <TextView
+            android:id="@+id/tv_author2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text=""
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_comment_author"
+            app:layout_constraintTop_toTopOf="@+id/iv_comment_author"
+           />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text=""
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_comment_author"
+            app:layout_constraintTop_toBottomOf="@+id/tv_author2"
+            tools:text="Lorem ipsum" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="iv_comment_author, tv_comment" />
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            image_url_circle="@{item.user_image}"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@color/color_E3E3E3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/edittext_search"
+            android:hint="@string/comment"
+            android:paddingStart="16dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="7dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
+            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+        <ImageButton
+            android:id="@+id/btn_send_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_vector"
+            android:backgroundTintMode="add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

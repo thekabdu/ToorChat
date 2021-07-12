@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="kz.diaspora.app.domain.model.MessageModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|bottom"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:visibility="gone"
+            android:visibility="@{item.is_my_message()? View.VISIBLE : View.GONE , default=gone}"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/background_message_my"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:text="@{item.text}"
+                android:textSize="17sp"
+                tools:text="messageasdf asdf asdf asdf asdf " />
+
+            <ImageView
+                image_url_circle="@{item.user_image}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:src="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|bottom"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:visibility="visible"
+            android:visibility="@{!item.is_my_message()? View.VISIBLE : View.GONE , default=gone}"
+            >
+
+            <ImageView
+                image_url_circle="@{item.user_image}"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:src="@color/color_F3F3F3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="100dp"
+                android:background="@drawable/background_message"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
+                android:paddingStart="13dp"
+                android:paddingEnd="13dp"
+                android:text="@{item.text}"
+                android:textSize="17sp"
+                tools:text="messageasdf asdf asdf asdf asdf " />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>

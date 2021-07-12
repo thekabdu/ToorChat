@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_advert"
+    app:startDestination="@id/item_edit_post">
+
+    <fragment
+        android:id="@+id/item_edit_post"
+        android:name="kz.diaspora.app.ui.edit_advert.EditAdvertFragment"
+        android:label="@string/create_advert"
+        tools:layout="@layout/fragment_edit_advert">
+        <action
+            android:id="@+id/to_location_country"
+            app:destination="@id/item_location_country" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_location_country"
+        android:name="kz.diaspora.app.ui.location_post.LocationCountryPostFragment"
+        android:label="fragment_location_country_post"
+        tools:layout="@layout/fragment_location_country_post" >
+        <action
+            android:id="@+id/to_location_city"
+            app:destination="@id/item_location_city" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_location_city"
+        android:name="kz.diaspora.app.ui.location_post.LocationCityPostFragment"
+        android:label="fragment_location_city_post"
+        tools:layout="@layout/fragment_location_city_post" >
+
+        <action
+            android:id="@+id/to_edit_post"
+            app:destination="@id/item_edit_post" />
+    </fragment>
+
+</navigation>
