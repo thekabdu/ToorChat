@@ -1,6 +1,7 @@
 package kz.diaspora.app.ui.sign_up
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -67,15 +68,25 @@ class SignUpFragment : Fragment() {
 
     private fun setListeners() {
         binding.btnSignUp.setOnClickListener {
-            viewModel.register(binding.etUsername.text.toString(),
-                    binding.etPassword.text.toString(),
-                    binding.etNameSurname.text.toString(),
-                    binding.etNameName.text.toString(),
+            viewModel.register(
+                binding.etUsername.text.toString(),
+                binding.etPassword.text.toString(),
+                binding.etNameSurname.text.toString(),
+                binding.etNameName.text.toString(),
+
                 // .split(" ")[1]
-            binding.etLogin.text.toString())
+                binding.etLogin.text.toString()
+
+            )
         }
         binding.btnSignIn.setOnClickListener {
             activity?.onBackPressed()
+        }
+        binding.txtIAgreeConf.setOnClickListener {
+            val url = "https://drive.google.com/file/d/1kbIH1shtAdsGMGp-jcVsfxKoqsOaDVwK/view"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
         }
     }
 
