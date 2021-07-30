@@ -97,7 +97,6 @@ class EditPostFragment : Fragment() {
                         fromList.add("Пожалуйста, выберите страну в профиле")
                     }
 
-
                     val adapterFrom = ArrayAdapter(
                         requireContext(),
                         android.R.layout.simple_spinner_item, fromList

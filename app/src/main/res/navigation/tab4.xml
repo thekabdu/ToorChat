@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/item_profile"
         android:name="kz.diaspora.app.ui.profile.ProfileFragment"
-        android:label=""
+        android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
 
         <action

@@ -2,14 +2,11 @@ package kz.diaspora.app.ui.profile
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,11 +16,9 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.databinding.FragmentProfileBinding
-import kz.diaspora.app.domain.model.PostModel
 import kz.diaspora.app.ui.MainActivity
 import kz.diaspora.app.ui.StartActivity
 import kz.diaspora.app.ui.my_adverts.MyAdvertType
-import kz.diaspora.app.utils.advert
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import pl.aprilapps.easyphotopicker.MediaFile
@@ -43,12 +38,12 @@ class ProfileFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_profile, container, false
+                inflater, R.layout.fragment_profile, container, false
         )
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -93,7 +88,7 @@ class ProfileFragment : Fragment() {
             })
 
             countsData.observe(viewLifecycleOwner, {
-                if (it!=null) {
+                if (it != null) {
                     binding.tvFavoriteCount.text = it.favourite_posts.toString()
                     binding.tvWaitCount.text = it.wait.toString()
                     binding.tvActiveCount.text = it.active.toString()
@@ -201,35 +196,41 @@ class ProfileFragment : Fragment() {
                 .build()
             easyImage.openChooser(this)
         }
+
+        binding.txtMessageHelp.setOnClickListener {
+            val uri: Uri = Uri.parse("https://diaspora.direct/support")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         easyImage.handleActivityResult(
-            requestCode,
-            resultCode,
-            data,
-            requireActivity(),
-            object : DefaultCallback() {
-                override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
-                    avatarFile = imageFiles[0].file
-                    viewModel.changeUserAvatar(avatarFile!!.path)
-                    Glide.with(requireContext())
-                        .load(imageFiles[0].file)
-                        .placeholder(R.drawable.avatar_placeholder)
-                        .circleCrop()
-                        .into(binding.ivAvatar)
-                }
+                requestCode,
+                resultCode,
+                data,
+                requireActivity(),
+                object : DefaultCallback() {
+                    override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
+                        avatarFile = imageFiles[0].file
+                        viewModel.changeUserAvatar(avatarFile!!.path)
+                        Glide.with(requireContext())
+                                .load(imageFiles[0].file)
+                                .placeholder(R.drawable.avatar_placeholder)
+                                .circleCrop()
+                                .into(binding.ivAvatar)
+                    }
 
-                override fun onImagePickerError(error: Throwable, source: MediaSource) {
-                    //Some error handling
-                    error.printStackTrace()
-                }
+                    override fun onImagePickerError(error: Throwable, source: MediaSource) {
+                        //Some error handling
+                        error.printStackTrace()
+                    }
 
-                override fun onCanceled(source: MediaSource) {
-                    //Not necessary to remove any files manually anymore
-                }
-            })
+                    override fun onCanceled(source: MediaSource) {
+                        //Not necessary to remove any files manually anymore
+                    }
+                })
     }
 
     override fun onResume() {
