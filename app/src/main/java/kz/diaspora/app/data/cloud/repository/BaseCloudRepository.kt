@@ -121,4 +121,7 @@ interface BaseCloudRepository {
     suspend fun saveCityTo(city_id: Int): ResultWrapper<StatusModel>
 
     suspend fun saveCityFrom(city_id: Int): ResultWrapper<StatusModel>
+
+    suspend fun createDeviceToken(device_token:String):ResultWrapper<UserWithToken>
+
 }

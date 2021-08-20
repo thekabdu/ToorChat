@@ -275,4 +275,7 @@
     <string name="instagram">Instagram</string>
     <string name="facebook">Facebook</string>
     <string name="i_agree_confidentiality">я согласен с <u> Политикой конфиденциальности</u></string>
+
+    <string name="channel_id" translatable="false">hardik-channel</string>
+    <string name="channel_name" translatable="false">hardik</string>
 </resources>

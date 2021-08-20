@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.iid.FirebaseInstanceId
 //import com.github.nkzawa.socketio.client.IO
 //import com.github.nkzawa.socketio.client.Socket
 import dagger.hilt.android.AndroidEntryPoint
@@ -115,6 +116,12 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
     private fun setListeners() {
         binding.etSearch.addTextChangedListener {
             addItemsByFilterSearch(viewModel.advertsData.value)
+        }
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val deviceToken = instanceIdResult.token
+
+            Log.d("deviceToken", deviceToken)
+            viewModel.sendDeviceToken(deviceToken)
         }
     }
 

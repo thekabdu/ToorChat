@@ -7,10 +7,7 @@ import kz.diaspora.app.core.BaseViewModel
 import kz.diaspora.app.data.cloud.ResultWrapper
 import kz.diaspora.app.data.cloud.repository.BaseCloudRepository
 import kz.diaspora.app.data.db.PrefsImpl
-import kz.diaspora.app.domain.model.CategoryList
-import kz.diaspora.app.domain.model.ChatModel
-import kz.diaspora.app.domain.model.PostModel
-import kz.diaspora.app.domain.model.StatusModel
+import kz.diaspora.app.domain.model.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,6 +23,7 @@ class FeedViewModel @Inject constructor(
     val chatsData: MutableLiveData<List<ChatModel>> by lazy { MutableLiveData<List<ChatModel>>() }
     val roomsData: MutableLiveData<List<String>> by lazy { MutableLiveData<List<String>>() }
     val messageData: MutableLiveData<StatusModel> by lazy { MutableLiveData<StatusModel>() }
+    val DeviceTokenData: MutableLiveData<UserWithToken> by lazy { MutableLiveData<UserWithToken>() }
     val error: MutableLiveData<ResultWrapper.Error> by lazy { MutableLiveData<ResultWrapper.Error>() }
 
     init {
@@ -132,6 +130,22 @@ class FeedViewModel @Inject constructor(
                 is ResultWrapper.Error -> error.postValue(adverts)
                 is ResultWrapper.Success -> {
                     messageData.postValue(adverts.value)
+                }
+            }
+            isRefreshing.postValue(false)
+        }
+    }
+    fun sendDeviceToken(device_token: String){
+        launchIO {
+            isRefreshing.postValue(true)
+            val data = baseCloudRepository.createDeviceToken(
+                device_token
+            )
+            when (data) {
+                is ResultWrapper.Error -> error.postValue(data)
+                is ResultWrapper.Success -> {
+                    DeviceTokenData.postValue(data.value)
+                    prefsImpl.setToken(data.value.access_token)
                 }
             }
             isRefreshing.postValue(false)

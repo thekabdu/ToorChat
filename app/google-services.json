@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1020249555464",
+    "project_id": "diaspora-9ef6b",
+    "storage_bucket": "diaspora-9ef6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020249555464:android:63f50e0a5bacf96d1f07bd",
+        "android_client_info": {
+          "package_name": "kz.diaspora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020249555464-vpunspd659cggscup353stoeliltlqkf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc578uKwwu3xNhKb7KxLQeLFYgo3M6dHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020249555464-vpunspd659cggscup353stoeliltlqkf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

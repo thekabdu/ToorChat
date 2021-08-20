@@ -2,13 +2,19 @@ package kz.diaspora.app.ui.messages
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kz.diaspora.app.core.BaseViewModel
 import kz.diaspora.app.data.cloud.ResultWrapper
 import kz.diaspora.app.data.cloud.repository.BaseCloudRepository
 import kz.diaspora.app.data.db.PrefsImpl
+import kz.diaspora.app.di.NetworkModule
 import kz.diaspora.app.domain.model.MessageModel
 import kz.diaspora.app.domain.model.MessagesModel
+import kz.diaspora.app.domain.model.PushNotificationModel
 import okhttp3.internal.notify
 import javax.inject.Inject
 
@@ -67,8 +73,17 @@ class MessagesViewModel @Inject constructor(
         }
     }
 
-    fun sendMessage(messageModel: MessageModel) {
-
+    fun sendNotification(notification: PushNotificationModel) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = NetworkModule.api.postNotification(notification)
+            if(response.isSuccessful) {
+                Log.d(TAG, "Response: ${Gson().toJson(response)}")
+            } else {
+                Log.e(TAG, response.errorBody().toString())
+            }
+        } catch(e: Exception) {
+            Log.e(TAG, e.toString())
+        }
     }
 }
 

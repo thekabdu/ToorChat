@@ -21,6 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.databinding.FragmentMessagesBinding
 import kz.diaspora.app.domain.model.MessageModel
+import kz.diaspora.app.domain.model.NotificationData
+import kz.diaspora.app.domain.model.PushNotificationModel
 import kz.diaspora.app.ui.MainActivity
 import kz.diaspora.app.ui.messages.adapter.MessagesAdapter
 import org.json.JSONException
@@ -158,6 +160,20 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
             if (binding.etMessage.text.toString() != "") {
                 viewModel.sendMessage(args.model.id.toString(), binding.etMessage.text.toString())
                 binding.etMessage.setText("")
+            }
+        }
+
+        binding.ivSendMessage.setOnClickListener {
+            val username = binding.etMessage.text.toString()
+            val message = binding.etMessage.text.toString()
+            val recipientToken = binding.etToken.text.toString()
+            if(username.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
+                PushNotificationModel(
+                    NotificationData(username, message),
+                    recipientToken
+                ).also {
+                    viewModel.sendNotification(it)
+                }
             }
         }
     }

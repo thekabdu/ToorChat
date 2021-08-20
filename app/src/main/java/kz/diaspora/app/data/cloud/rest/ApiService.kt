@@ -1,5 +1,7 @@
 package kz.diaspora.app.data.cloud.rest
 
+import kz.diaspora.app.data.cloud.firebase.Constants.Companion.CONTENT_TYPE
+import kz.diaspora.app.data.cloud.firebase.Constants.Companion.SERVER_KEY
 import kz.diaspora.app.domain.model.*
 import kz.diaspora.app.domain.model.requests.LoginUserRequest
 import kz.diaspora.app.domain.model.requests.RegisterUserRequest
@@ -9,6 +11,11 @@ import kz.diaspora.app.domain.model.response.ManipulatePostStatus
 import kz.diaspora.app.domain.model.response.SendCommentResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.POST
 import retrofit2.http.*
 
 interface ApiService {
@@ -178,4 +185,15 @@ interface ApiService {
     suspend fun saveCityFrom(
         @Query("city_id") city_id: Int
     ): StatusModel
+
+    @Headers("Authorization: key=$SERVER_KEY", "Content-Type:$CONTENT_TYPE")
+    @POST("fcm/send")
+    suspend fun postNotification(
+        @Body notification: PushNotificationModel
+    ): Response<ResponseBody>
+
+    @POST("api/device_token/create")
+    suspend fun createDeviceToken(
+            @Query("device_token") device_token: String?,
+    ):UserWithToken
 }

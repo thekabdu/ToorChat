@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kz.diaspora.app.core.Config
+import kz.diaspora.app.data.cloud.firebase.Constants.Companion.BASE_URL
 import kz.diaspora.app.data.cloud.repository.BaseCloudRepository
 import kz.diaspora.app.data.cloud.repository.CloudRepository
 import kz.diaspora.app.data.cloud.rest.ApiService
@@ -77,6 +78,19 @@ class NetworkModule {
         return CloudRepository(
             apIs
         )
+    }
+
+    companion object {
+        private val retrofit by lazy {
+            Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+
+        val api by lazy {
+            retrofit.create(ApiService::class.java)
+        }
     }
 
 

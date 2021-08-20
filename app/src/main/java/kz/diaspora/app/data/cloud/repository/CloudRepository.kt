@@ -341,4 +341,10 @@ class CloudRepository(
             api.saveCityFrom(city_id)
         }
     }
+
+    override suspend fun createDeviceToken(device_token :String): ResultWrapper<UserWithToken> {
+        return safeApiCall(dispatcher) {
+            api.createDeviceToken(device_token)
+        }
+    }
 }
