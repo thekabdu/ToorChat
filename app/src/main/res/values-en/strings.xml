@@ -275,7 +275,11 @@ Login </string>
     <string name = "create_advert"> Create ad </string>
     <string name = "edit_post"> Edit post </string>
     <string name="welcome_to_the_world">Welcome to the world of Diaspora</string>
+    <string name="welcome_to_the_world_ru">Добро пожаловать в мир Diaspora</string>
+    <string name="welcome_to_the_world_en">Welcome to the world of Diaspora</string>
     <string name="Next">Next</string>
+    <string name="next_ru">Далее</string>
+    <string name="next_en">Next</string>
     <string name="this_platform_search">It is a platform for finding and communicating compatriots abroad</string>
     <string name="splash_text_3">Here you can find fellow countrymen, provide or ask for advice or assistance, offer your services!</string>
     <string name="splash_text_4">Distance brings us closer!</string>

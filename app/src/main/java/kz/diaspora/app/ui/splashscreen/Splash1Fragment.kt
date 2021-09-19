@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat.recreate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,55 +67,52 @@ class Splash1Fragment : Fragment() {
 
         val mBuilder = AlertDialog.Builder(activity)
         mBuilder.setTitle("Выберите Язык")
-        mBuilder.setSingleChoiceItems(listItems, -1) { dialog, which ->
+        mBuilder.setSingleChoiceItems(listItems, 0) { dialog, which ->
             if (which == 0) {
-                setLocate("")
-                binding.btnLanguage.text = "RU"
-                recreate(requireActivity())
+                setLocate("ru")
+                binding.btnLanguage.setText("ru")
+
             } else if (which == 1) {
                 setLocate("en")
-                recreate(requireActivity())
-                binding.btnLanguage.text = "EN"
+                binding.btnLanguage.setText("en")
+
             }
             dialog.dismiss()
         }
-        var mmDialog = mBuilder.create()
+        val mmDialog = mBuilder.create()
         mmDialog.show()
     }
 
     @SuppressLint("CommitPrefEdits")
     private fun setLocate(Lang: String) {
         val config = resources.configuration
-        val locale = Locale("")
+        val locale = Locale(Lang)
+        Log.d("language", binding.btnLanguage.text.toString())
+        when (Lang) {
+            "ru" -> {
+                binding.btnNext.text = getString(R.string.next_ru)
+                binding.textView.text = getString(R.string.welcome_to_the_world_ru)
+            }
+            "en" -> {
+                binding.btnNext.text = getString(R.string.next_en)
+                binding.textView.text = getString(R.string.welcome_to_the_world_en)
+            }
+        }
         Locale.setDefault(locale)
         config.locale = locale
         resources.updateConfiguration(config, resources.displayMetrics)
         val prefs = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val editor = prefs!!.edit()
+        val editor = prefs.edit()
         editor.putString("My_Lang", Lang)
         editor.apply()
     }
 
-  /* fun changelanguage(context: Context): String? {
-        //String lang = "hi_IN";
-        //  Locale locale = new Locale(lang);
-        val locale = Locale.getDefault()
-        Locale.setDefault(locale)
-        System.out.println("My_Lang$locale")
-        val config = Configuration()
-        config.locale = locale
-        context.resources.updateConfiguration(config,
-                context.resources.displayMetrics)
-        return locale.toString()
-    }*/
-
     private fun loadLocate() {
-        val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("My_Lang", "")
-        setLocate(language!!)
+        val sharedPreferences = requireActivity().applicationContext.getSharedPreferences("LANGUAGES", Context.MODE_PRIVATE)
+        val Lang = sharedPreferences.getString("LANGUAGE", "")
+        setLocate(Lang.toString())
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
