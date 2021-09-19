@@ -34,7 +34,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/background_edittext"
-                android:hint="Номер телефона или адрес почты"
+                android:hint="@string/telephone_or_email"
                 android:padding="12dp" />
 
             <EditText

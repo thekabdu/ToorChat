@@ -437,7 +437,7 @@
                     android:id="@+id/txt_message_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Написать в службу поддержки"
+                    android:text="@string/Contact_support"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:drawableStart="@drawable/ic_lep"

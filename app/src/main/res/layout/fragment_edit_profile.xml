@@ -55,7 +55,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/background_edittext_edit_advert"
                 android:padding="8dp"
-                android:text="Ирина"
+                android:hint="Ирина"
                 android:textSize="14sp" />
 
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/background_edittext_edit_advert"
                 android:padding="8dp"
-                android:text="Кайратовна"
+                android:hint="Кайратовна"
                 android:textSize="14sp" />
 
             <TextView

@@ -4,14 +4,20 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.IO
@@ -20,6 +26,7 @@ import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.databinding.FragmentMessagesBinding
+import kz.diaspora.app.domain.model.ChatModel
 import kz.diaspora.app.domain.model.MessageModel
 import kz.diaspora.app.domain.model.NotificationData
 import kz.diaspora.app.domain.model.PushNotificationModel
@@ -47,6 +54,7 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
     val gson: Gson = Gson()
 
     private val adapter: MessagesAdapter by lazy { MessagesAdapter(arrayListOf()) }
+   // val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_container)
 
     private lateinit var easyImage: EasyImage
     private var avatarFile: File? = null
@@ -88,10 +96,14 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
         }
 
         (activity as AppCompatActivity).supportActionBar?.title = viewModel.messagesData.value?.chat_name
+
+
     }
 
     private fun initView() {
         val mLayoutManager = LinearLayoutManager(context)
+        mLayoutManager.stackFromEnd = true
+        mLayoutManager.reverseLayout = false
         binding.rvMainHome.layoutManager = mLayoutManager
         binding.rvMainHome.adapter = adapter
     }
@@ -138,6 +150,9 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
                 (activity as AppCompatActivity).supportActionBar?.title = ""
                 args.model.chat_name?.let { it1 -> (activity as MainActivity).setToolbarTitle(it1) }
                 (activity as MainActivity).setToolbarEndText(args.model.chat_users_count.toString())
+
+
+
                 (activity as MainActivity).setToolbarLike(true)
                 (activity as MainActivity).setToolbarImage(args.model.is_liked)
             })
@@ -163,7 +178,7 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
             }
         }
 
-        binding.ivSendMessage.setOnClickListener {
+        /*binding.ivSendMessage.setOnClickListener {
             val username = binding.etMessage.text.toString()
             val message = binding.etMessage.text.toString()
             val recipientToken = binding.etToken.text.toString()
@@ -175,7 +190,7 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
                     viewModel.sendNotification(it)
                 }
             }
-        }
+        }*/
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -207,9 +222,21 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
     }
 
     override fun onMessageClick(messageModel: MessageModel) {
-//        val action = MessagesFragmentDirections.toHome()
-//        findNavController().navigate(action)
+
     }
+
+   /* private fun onClick(v: View){
+        val action = MessagesFragmentDirections.toUsersInChatFragment()
+        v.findNavController().navigate(action)
+    }*/
+
+   /* override fun onOptionsItemSelected(item: MenuItem,chatModel: ChatModel): Boolean {
+         if(item.itemId == R.id.tv_drop) {
+            val action = MessagesFragmentDirections.toUsersInChatFragment(chatModel)
+            findNavController().navigate(action)
+        }
+        return true
+    }*/
 
     private fun refresh() {
         adapter.clear()

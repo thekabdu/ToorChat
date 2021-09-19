@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:text="Статус"
+                android:text="@string/status_"
                 tools:text="Статус"
                 android:textSize="14sp"
                 android:textStyle="bold"

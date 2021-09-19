@@ -1,12 +1,14 @@
 package kz.diaspora.app.ui.messages.adapter
 
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import kz.diaspora.app.BR.item
 import kz.diaspora.app.core.DataBindingViewHolder
 import kz.diaspora.app.databinding.ItemMessageBinding
+import kz.diaspora.app.domain.model.ChatModel
 import kz.diaspora.app.domain.model.MessageModel
 
 class MessagesAdapter(
@@ -48,5 +50,6 @@ class MessagesAdapter(
 
     interface OnMessageClickListener {
         fun onMessageClick(messageModel: MessageModel)
+       /* fun onOptionsItemSelected(item: MenuItem, chatModel: ChatModel): Boolean*/
     }
 }

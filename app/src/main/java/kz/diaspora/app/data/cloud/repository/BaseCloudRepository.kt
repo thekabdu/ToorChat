@@ -111,6 +111,8 @@ interface BaseCloudRepository {
 
     suspend fun getMessages(chat_id: Int): ResultWrapper<MessagesModel>
 
+    suspend fun getUsersInChat(chat_id: Int): ResultWrapper<List<User>>
+
     suspend fun likeChat(chat_id: Int): ResultWrapper<StatusModel>
 
     suspend fun sendMessage(chat_id: Int,

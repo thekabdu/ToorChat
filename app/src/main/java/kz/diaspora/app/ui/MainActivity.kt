@@ -10,11 +10,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.core.App
 import kz.diaspora.app.databinding.ActivityMainBinding
+import kz.diaspora.app.databinding.ItemUsersInChatBinding
+import kz.diaspora.app.domain.model.ChatModel
+import kz.diaspora.app.ui.messages.users_in_chat.UsersInChatFragment
 import kz.diaspora.app.utils.setupWithNavController
 
 @AndroidEntryPoint
@@ -44,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     public fun setToolbarTitle(title: String) {
         binding.tvToolbar.text = title
     }
+
 
     public fun setToolbarLike(vis: Boolean) {
         if (vis) binding.ivLike.visibility = View.VISIBLE
@@ -110,7 +117,14 @@ class MainActivity : AppCompatActivity() {
                     setToolbarLike(false)
                     setToolbarEndText("")
                     binding.toolbar.visibility = View.VISIBLE
-//                    binding.toolbar.navigationIcon = null
+
+
+                }
+                R.id.item_users_list -> {
+                    setToolbarTitle("")
+                    setToolbarEndText("")
+                    binding.toolbar.visibility = View.VISIBLE
+                   // binding.toolbar.navigationIcon = null
                 }
                 R.id.item_notifications -> {
                     setToolbarTitle("")

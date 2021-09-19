@@ -14,11 +14,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.iid.FirebaseInstanceId
 //import com.github.nkzawa.socketio.client.IO
 //import com.github.nkzawa.socketio.client.Socket
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
+import kz.diaspora.app.data.cloud.firebase.Constants
+import kz.diaspora.app.data.cloud.firebase.Constants.Companion.BASE_URL
+import kz.diaspora.app.data.cloud.firebase.Constants.Companion.FIREBASE_DEVICE_TOKEN
+import kz.diaspora.app.data.cloud.firebase.Constants.Companion.SERVER_KEY
+import kz.diaspora.app.data.cloud.firebase.FirebaseService
 import kz.diaspora.app.databinding.FragmentFeedBinding
 import kz.diaspora.app.domain.model.CategoryModel
 import kz.diaspora.app.domain.model.PostModel
@@ -26,6 +33,7 @@ import kz.diaspora.app.ui.feed.adapter.CategoriesAdapter
 import kz.diaspora.app.ui.feed.adapter.FeedAdapter
 import kz.diaspora.app.utils.EndlessRecyclerViewScrollListener
 import kz.diaspora.app.utils.setDivider
+import org.json.JSONObject
 import java.net.URISyntaxException
 
 @AndroidEntryPoint
@@ -124,6 +132,40 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
             viewModel.sendDeviceToken(deviceToken)
         }
     }
+
+    private fun postNotification(title: String?, description: String?) {
+        val volleyQueue = Volley.newRequestQueue(activity)
+
+        val params = JSONObject().let {
+            it.put("to", "${Constants.FIREBASE_DEVICE_TOKEN}/${getString(R.string.default_notification_channel_name)}")
+            it.put("notification", JSONObject().apply {
+                put("title", title)
+                put("body", description)
+                put("sound", "default")
+                put("content_available", true)
+                put("priority", "high")
+            })
+        }
+
+        val request = object : JsonObjectRequest(
+                Method.POST,
+                Constants.BASE_URL,
+                params,
+                {
+                    Toast.makeText(activity, "Push Notification Success", Toast.LENGTH_LONG).show()
+                }, { Toast.makeText(activity, "Push Notification Failed", Toast.LENGTH_LONG).show() }
+        ) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "key=${Constants.SERVER_KEY}"
+                return headers
+            }
+        }
+        volleyQueue.add(request)
+    }
+
+
 
     private fun addItemsByFilterSearch(posts: List<PostModel>?) {
         val searchText = binding.etSearch.text.toString()

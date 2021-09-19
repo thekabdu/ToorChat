@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kz.diaspora.app.core.DataBindingViewHolder
@@ -51,6 +52,9 @@ class ChatAdapter(
                 listener.onLikeClick(t.id)
                 items.find { it.id == t.id }?.is_liked = !t.is_liked
             }
+            dataBinding.textView2.setOnClickListener {
+                listener.onUserListClick(t, item)
+            }
         }
     }
 
@@ -71,6 +75,7 @@ class ChatAdapter(
     interface OnProjectClickListener {
         fun onEnterClick(chatModel: ChatModel, position: Int)
         fun onJoinClick(chatModel: ChatModel, position: Int)
+        fun onUserListClick(chatModel: ChatModel, position: Int)
         fun onLikeClick(chat_id: Int)
     }
 }

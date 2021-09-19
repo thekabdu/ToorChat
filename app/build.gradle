@@ -11,8 +11,8 @@ android {
         applicationId "kz.diaspora"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 8
+        versionName "1.0.8"
         multiDexEnabled true
         setProperty("archivesBaseName", "diaspora-$versionName")
     }
@@ -60,6 +60,8 @@ dependencies {
     implementation 'com.google.dagger:hilt-android:2.31.2-alpha'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     kapt 'com.google.dagger:hilt-android-compiler:2.31.2-alpha'
 
     //Navigation

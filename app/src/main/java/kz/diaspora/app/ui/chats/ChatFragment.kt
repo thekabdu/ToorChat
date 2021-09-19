@@ -130,6 +130,11 @@ class ChatFragment : Fragment(), ChatAdapter.OnProjectClickListener {
         Navigation.findNavController(requireView()).navigate(action)
     }
 
+    override fun onUserListClick(chatModel: ChatModel, position: Int) {
+        val action = ChatFragmentDirections.itemUsersList(chatModel)
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
     override fun onJoinClick(chatModel: ChatModel, position: Int) {
         this.position = position
         val action = ChatFragmentDirections.toMessages(chatModel)
@@ -149,7 +154,6 @@ class ChatFragment : Fragment(), ChatAdapter.OnProjectClickListener {
 //            e.printStackTrace()
 //            Log.d("fail", "Failed to connect")
 //        }
-
     }
 
     override fun onLikeClick(chat_id: Int) {

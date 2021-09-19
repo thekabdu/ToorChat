@@ -196,4 +196,10 @@ interface ApiService {
     suspend fun createDeviceToken(
             @Query("device_token") device_token: String?,
     ):UserWithToken
+
+    @GET("api/chat/users")
+    suspend fun getUsersInChat(
+        @Query("chat_id") chat_id: Int
+    ): List<User>
+
 }

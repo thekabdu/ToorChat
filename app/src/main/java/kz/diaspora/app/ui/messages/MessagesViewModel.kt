@@ -73,7 +73,7 @@ class MessagesViewModel @Inject constructor(
         }
     }
 
-    fun sendNotification(notification: PushNotificationModel) = CoroutineScope(Dispatchers.IO).launch {
+    /*fun sendNotification(notification: PushNotificationModel) = CoroutineScope(Dispatchers.IO).launch {
         try {
             val response = NetworkModule.api.postNotification(notification)
             if(response.isSuccessful) {
@@ -84,7 +84,7 @@ class MessagesViewModel @Inject constructor(
         } catch(e: Exception) {
             Log.e(TAG, e.toString())
         }
-    }
+    }*/
 }
 
 

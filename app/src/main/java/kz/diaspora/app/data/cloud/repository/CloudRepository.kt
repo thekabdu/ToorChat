@@ -347,4 +347,10 @@ class CloudRepository(
             api.createDeviceToken(device_token)
         }
     }
+
+    override suspend fun getUsersInChat(chat_id: Int): ResultWrapper<List<User>> {
+        return safeApiCall(dispatcher) {
+            api.getUsersInChat(chat_id)
+        }
+    }
 }

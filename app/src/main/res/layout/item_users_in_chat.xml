@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="kz.diaspora.app.domain.model.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:paddingTop="16dp"
+        android:paddingLeft="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:id="@+id/iv_users_in_chat"
+            image_url_circle="@{item.user_image}"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/avatar_placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:ellipsize="none"
+            android:scrollHorizontally="false"
+            android:text='@{item.name + ` ` + item.surname}'
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_users_in_chat"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ирина Кайратовна" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text='@{item.username}'
+            android:textSize="16sp"
+            android:layout_marginStart="13dp"
+            app:layout_constraintStart_toEndOf="@+id/iv_users_in_chat"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:text="irina1996"/>
+
+        <Button
+            android:id="@+id/btn_enter"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:text="@string/view_"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            android:layout_marginEnd="7dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

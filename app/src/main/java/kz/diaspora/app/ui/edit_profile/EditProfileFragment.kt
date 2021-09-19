@@ -59,7 +59,7 @@ class EditProfileFragment : Fragment() {
 
             statusData.observe(viewLifecycleOwner, {
                 val statusList = mutableListOf<String>()
-                statusList.add("Не выбрано")
+                statusList.add("")
                 for (status in it) {
                     status.name?.let { it1 -> statusList.add(it1) }
                 }

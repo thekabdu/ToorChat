@@ -20,7 +20,7 @@
             android:id="@+id/tv_null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="У вас пока что нету комментарий"
+            android:text="@string/no_coment"
             android:textColor="@color/color_7C7C7C"
             android:textSize="16sp"
             android:visibility="gone"

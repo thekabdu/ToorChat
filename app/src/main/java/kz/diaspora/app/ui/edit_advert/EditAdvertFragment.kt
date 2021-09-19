@@ -38,15 +38,15 @@ class EditAdvertFragment : Fragment() {
     private var avatarFile: File? = null
     private var avatarFilePath: String? = null
     private var category_id: String? = null
-    private lateinit var city_id: String
+    private var city_id: String = ""
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_edit_advert, container, false
+                inflater, R.layout.fragment_edit_advert, container, false
         )
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -73,10 +73,10 @@ class EditAdvertFragment : Fragment() {
             postData.observe(viewLifecycleOwner, {
                 if (it != null) {
                     Glide.with(requireContext())
-                        .load(it.path)
-                        .placeholder(R.drawable.ic_add_photo)
-                        .circleCrop()
-                        .into(binding.ivImage)
+                            .load(it.path)
+                            .placeholder(R.drawable.ic_add_photo)
+                            .circleCrop()
+                            .into(binding.ivImage)
                     avatarFilePath = it.path
                     binding.etTitle.setText(it.title)
                     binding.etDescription.setText(it.description)
@@ -89,7 +89,7 @@ class EditAdvertFragment : Fragment() {
                 if (it != null) {
                     binding.sFrom.text = it
                 } else {
-                    binding.sFrom.text = "Местоположение"
+                    binding.sFrom.text = ""
                 }
             })
 
@@ -97,15 +97,15 @@ class EditAdvertFragment : Fragment() {
                 if (it != null) {
                     val fromList = ArrayList<String>()
                     if (it.size != 0) {
-                        fromList.add("Выберите категорию")
+                        fromList.add("")
                         for (i in it.indices) {
                             fromList.add(it[i].category_name)
                         }
                     }
 
                     val adapterFrom = ArrayAdapter(
-                        requireContext(),
-                        android.R.layout.simple_spinner_item, fromList
+                            requireContext(),
+                            android.R.layout.simple_spinner_item, fromList
                     )
                     adapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     binding.sCategories.adapter = adapterFrom
@@ -124,24 +124,24 @@ class EditAdvertFragment : Fragment() {
             Log.d(TAG, "Clicked $avatarFile")
 
             if (binding.etTitle.text.isNullOrEmpty() ||
-                binding.etDescription.text.isNullOrEmpty() ||
-                binding.etPhone.text.isNullOrEmpty() ||
+                    binding.etDescription.text.isNullOrEmpty() ||
+                    binding.etPhone.text.isNullOrEmpty() ||
 //                binding.etEmail.text.isNullOrEmpty() ||
-                avatarFilePath.isNullOrEmpty() ||
-                binding.sFrom.text == "Местоположение"
+                    avatarFilePath.isNullOrEmpty() ||
+                    binding.sFrom.text == ""
             ) {
                 Toast.makeText(context, "Пожалуйста, заполните все поля!", Toast.LENGTH_SHORT)
-                    .show()
+                        .show()
             } else {
 
                 viewModel.createPost(
-                    avatarFilePath!!,
-                    binding.etTitle.text.toString(),
-                    binding.etDescription.text.toString(),
-                    category_id,
-                    city_id,
-                    "", //binding.etEmail.text.toString()
-                    binding.etPhone.text.toString()
+                        avatarFilePath!!,
+                        binding.etTitle.text.toString(),
+                        binding.etDescription.text.toString(),
+                        category_id,
+                        city_id,
+                        "", //binding.etEmail.text.toString()
+                        binding.etPhone.text.toString()
                 )
                 getActivity()?.finish()
 
@@ -155,20 +155,20 @@ class EditAdvertFragment : Fragment() {
             val action = EditAdvertFragmentDirections.toLocationCountry()
             findNavController().navigate(action)
             viewModel.savePostData(
-                avatarFilePath,
-                binding.etTitle.text.toString(),
-                binding.etDescription.text.toString(),
-                category_id,
-                binding.etPhone.text.toString()
+                    avatarFilePath,
+                    binding.etTitle.text.toString(),
+                    binding.etDescription.text.toString(),
+                    category_id,
+                    binding.etPhone.text.toString()
             )
         }
 
         binding.sCategories.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 if (position > 0) {
                     category_id = viewModel.categoryList.value?.get(position)?.id.toString()
@@ -182,10 +182,10 @@ class EditAdvertFragment : Fragment() {
 
         binding.chooseFile.setOnClickListener {
             easyImage = EasyImage.Builder(requireContext())
-                .setCopyImagesToPublicGalleryFolder(true)
-                .setFolderName("diaspora")
-                .allowMultiple(false) //todo multiple
-                .build()
+                    .setCopyImagesToPublicGalleryFolder(true)
+                    .setFolderName("diaspora")
+                    .allowMultiple(false) //todo multiple
+                    .build()
             easyImage.openChooser(this)
         }
 
@@ -194,29 +194,29 @@ class EditAdvertFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         easyImage.handleActivityResult(
-            requestCode,
-            resultCode,
-            data,
-            requireActivity(),
-            object : DefaultCallback() {
-                override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
-                    avatarFilePath = imageFiles[0].file.path
-                    Glide.with(requireContext())
-                        .load(avatarFilePath)
-                        .circleCrop()
-                        .into(binding.ivImage)
+                requestCode,
+                resultCode,
+                data,
+                requireActivity(),
+                object : DefaultCallback() {
+                    override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
+                        avatarFilePath = imageFiles[0].file.path
+                        Glide.with(requireContext())
+                                .load(avatarFilePath)
+                                .circleCrop()
+                                .into(binding.ivImage)
 //                    avatarFilePath = imageFiles[0].file.path
-                }
+                    }
 
-                override fun onImagePickerError(error: Throwable, source: MediaSource) {
-                    //Some error handling
-                    error.printStackTrace()
-                }
+                    override fun onImagePickerError(error: Throwable, source: MediaSource) {
+                        //Some error handling
+                        error.printStackTrace()
+                    }
 
-                override fun onCanceled(source: MediaSource) {
-                    //Not necessary to remove any files manually anymore
-                }
-            })
+                    override fun onCanceled(source: MediaSource) {
+                        //Not necessary to remove any files manually anymore
+                    }
+                })
     }
 
     override fun onResume() {

@@ -278,4 +278,20 @@
 
     <string name="channel_id" translatable="false">hardik-channel</string>
     <string name="channel_name" translatable="false">hardik</string>
+    <string name="default_notification_channel_name">Diaspora</string>
+    <string name="welcome_to_the_world">Добро пожаловать в мир Diaspora</string>
+    <string name="Next">Далее</string>
+    <string name="this_platform_search">Это платформа для поиска и общения соотечественников за границей</string>
+    <string name="splash_text_3">Здесь Вы можете найти земляков, оказать либо спросить совета или помощи, предложить свои услуги!</string>
+    <string name="splash_text_4">Расстояние нас сближает!</string>
+    <string name="telephone_or_email">Номер телефона или адрес почты</string>
+    <string name="chose_where_u_from">Выберите \'Откуда Вы?\' и Ваше текущее \'Местоположение\'</string>
+    <string name="no_chat">В этом регионе нету чатов</string>
+    <string name="location">Местоположение</string>
+    <string name="no_coment">У вас пока что нету комментарий</string>
+    <string name="status_">Статус</string>
+    <string name="users_in_chat">Пользователи:</string>
+    <string name="view_">Посмотреть</string>
+    <string name="chat_users">В этом чате нету пользовотелей</string>
+    <string name="Contact_support">Написать в службу поддержки</string>
 </resources>

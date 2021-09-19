@@ -13,6 +13,9 @@
         <action
             android:id="@+id/toMessages"
             app:destination="@id/item_messages" />
+        <action
+            android:id="@+id/item_users_list"
+            app:destination="@id/item_users_list" />
     </fragment>
 
     <fragment
@@ -25,4 +28,29 @@
             android:name="model"
             app:argType="kz.diaspora.app.domain.model.ChatModel" />
     </fragment>
+    <fragment
+        android:id="@+id/item_users_list"
+        android:name="kz.diaspora.app.ui.messages.users_in_chat.UsersInChatFragment"
+        android:label="item_users_list"
+        tools:layout="@layout/users_in_chat_fragment" >
+
+        <argument
+            android:name="model"
+            app:argType="kz.diaspora.app.domain.model.ChatModel" />
+        <action
+            android:id="@+id/to_profileInfoFragment"
+            app:destination="@id/item_profile_info" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/item_profile_info"
+        android:name="kz.diaspora.app.ui.profile_info.ProfileInfoFragment"
+        android:label="@string/fragment_profile_info"
+        tools:layout="@layout/fragment_profile_info">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+    </fragment>
+
+
 </navigation>
