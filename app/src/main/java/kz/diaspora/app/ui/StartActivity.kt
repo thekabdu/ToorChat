@@ -1,5 +1,6 @@
 package kz.diaspora.app.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,7 +9,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.databinding.ActivityStartBinding
 import kz.diaspora.app.ui.splashscreen.SplashFragment
+import kz.diaspora.app.ui.splashscreen.SplashLanguageFragment
 import kz.diaspora.app.utils.Utils
+import kz.diaspora.app.utils.setLocale
 
 @AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
@@ -53,6 +56,9 @@ class StartActivity : AppCompatActivity() {
         } else {
             finish()
         }
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(setLocale(newBase))
     }
 
     override fun onDestroy() {

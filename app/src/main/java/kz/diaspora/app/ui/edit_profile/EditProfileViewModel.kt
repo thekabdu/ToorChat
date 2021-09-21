@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditProfileViewModel @Inject constructor(
-    private val prefsImpl: PrefsImpl,
+    val prefsImpl: PrefsImpl,
     private val baseCloudRepository: BaseCloudRepository
 ) : BaseViewModel() {
 

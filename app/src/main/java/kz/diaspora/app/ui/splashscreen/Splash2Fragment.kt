@@ -1,5 +1,6 @@
 package kz.diaspora.app.ui.splashscreen
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -9,6 +10,7 @@ import kz.diaspora.app.R
 import kz.diaspora.app.databinding.FragmentSplash1Binding
 import kz.diaspora.app.databinding.FragmentSplash2Binding
 import kz.diaspora.app.ui.StartActivity
+import kz.diaspora.app.utils.setLocale
 
 @AndroidEntryPoint
 class Splash2Fragment : Fragment() {
@@ -49,6 +51,10 @@ class Splash2Fragment : Fragment() {
             (activity as StartActivity).replaceFragment(Splash3Fragment())
         }
     }
+
+    /*override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(setLocale(newBase))
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()

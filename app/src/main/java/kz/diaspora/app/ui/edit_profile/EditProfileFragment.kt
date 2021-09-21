@@ -12,17 +12,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
+import kz.diaspora.app.data.db.PrefsImpl
 import kz.diaspora.app.databinding.FragmentEditProfileBinding
 import kz.diaspora.app.domain.model.User
+import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetCallback
+import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetDialogFragment
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class EditProfileFragment : Fragment() {
+class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, View.OnClickListener {
 
     private val TAG: String = this::class.java.simpleName
-
     private val viewModel: EditProfileViewModel by viewModels()
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
@@ -45,6 +47,7 @@ class EditProfileFragment : Fragment() {
         initView()
         setObservers()
         setListeners()
+        binding.spLang.setOnClickListener(this)
     }
 
     private fun initView() {
@@ -95,6 +98,14 @@ class EditProfileFragment : Fragment() {
                 } catch (e: Exception) {
 
                 }
+
+              /*  binding.spLang.setOnClickListener {
+                val bottomSheetFragment =
+                    LanguagesBottomSheetDialogFragment(viewModel.prefsImpl, activity,this@EditProfileFragment)
+                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+            }*/
+
+
 
                 if (it.marital_status == null || !isNumber(it.marital_status)) {
                     binding.spStatus.setSelection(0)
@@ -192,5 +203,20 @@ class EditProfileFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun languageClicked() {
+        activity?.onConfigurationChanged(activity?.applicationContext!!.resources!!.configuration)
+        activity?.recreate()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.sp_lang -> {
+                val bottomSheetFragment =
+                    LanguagesBottomSheetDialogFragment(viewModel.prefsImpl, activity, this)
+                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+            }
+        }
     }
 }

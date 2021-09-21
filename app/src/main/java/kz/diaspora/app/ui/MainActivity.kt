@@ -3,6 +3,7 @@ package kz.diaspora.app.ui
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,7 @@ import kz.diaspora.app.databinding.ActivityMainBinding
 import kz.diaspora.app.databinding.ItemUsersInChatBinding
 import kz.diaspora.app.domain.model.ChatModel
 import kz.diaspora.app.ui.messages.users_in_chat.UsersInChatFragment
+import kz.diaspora.app.utils.setLocale
 import kz.diaspora.app.utils.setupWithNavController
 
 @AndroidEntryPoint
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         setupBottomNavigationBar()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(setLocale(newBase))
     }
 
     public fun setToolbarTitle(title: String) {

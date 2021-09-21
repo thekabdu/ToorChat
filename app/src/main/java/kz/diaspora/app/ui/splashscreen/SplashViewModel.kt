@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-        private val prefsImpl: PrefsImpl,
+        val prefsImpl: PrefsImpl,
         private val baseCloudRepository: BaseCloudRepository
 ) : BaseViewModel() {
 
@@ -34,4 +34,6 @@ class SplashViewModel @Inject constructor(
             }
         }
     }
+
+
 }

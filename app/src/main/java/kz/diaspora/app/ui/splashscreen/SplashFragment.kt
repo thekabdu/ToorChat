@@ -43,7 +43,7 @@ class SplashFragment : Fragment() {
                         startActivity(Intent(requireContext(), MainActivity::class.java))
                         (activity as StartActivity).finish()
                     } else {
-                        (activity as StartActivity).replaceFragment(Splash1Fragment())
+                        (activity as StartActivity).replaceFragment(SplashLanguageFragment())
                     }
                 }, 1000)
             })

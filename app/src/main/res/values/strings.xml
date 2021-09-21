@@ -295,4 +295,6 @@
     <string name="view_">Посмотреть</string>
     <string name="chat_users">В этом чате нету пользовотелей</string>
     <string name="Contact_support">Написать в службу поддержки</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
