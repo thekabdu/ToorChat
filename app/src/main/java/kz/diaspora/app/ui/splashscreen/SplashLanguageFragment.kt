@@ -53,27 +53,10 @@ class SplashLanguageFragment : Fragment(), View.OnClickListener {
         setHasOptionsMenu(true)
         binding.lifecycleOwner = this
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /*binding.txtUse.setOnClickListener {
-          *//*  setLocate("en")*//*
-         *//*   setUSAButtonLang(viewModel.prefsImpl.getLanguage())*//*
-
-            (viewModel.prefsImpl.getLanguage())
-            (activity as StartActivity).replaceFragment(Splash1Fragment())
-        }
-        binding.txtRus.setOnClickListener {
-         *//*   setLocates("ru")*//*
-            setRuButtonLang(viewModel.prefsImpl.getLanguage())
-            (viewModel.prefsImpl.getLanguage())
-            (activity as StartActivity).replaceFragment(Splash1Fragment())
-        }*/
-    /*    langItemClick(viewModel.prefsImpl.getLanguage())*/
 
         initViews()
         setListeners()
@@ -96,23 +79,27 @@ class SplashLanguageFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         var lang = "ru"
         when (view.id) {
-            R.id.txt_use ->{
+            R.id.txt_use -> {
                 lang = "en"
                 (activity as StartActivity).replaceFragment(Splash1Fragment())
             }
             R.id.txt_rus -> {
-            lang = "ru"
-            (activity as StartActivity).replaceFragment(Splash1Fragment())
+                lang = "ru"
+                (activity as StartActivity).replaceFragment(Splash1Fragment())
             }
         }
         changeLocale(lang) //Change Locale on selection basis
     }
 
-
     //Change Locale
     fun changeLocale(lang: String) {
         myLocale = Locale(lang) //Set Selected Locale
         saveLocale(lang) //Save the selected locale
+        when (lang) {
+            "en" -> {
+                binding.txtLang.text = getString(R.string.Choose_your_language)
+            }
+        }
         Locale.setDefault(myLocale) //set new locale as default
         val config = Configuration() //get Configuration
         config.locale = myLocale //set config locale as selected locale
@@ -129,7 +116,7 @@ class SplashLanguageFragment : Fragment(), View.OnClickListener {
     fun loadLocale() {
         val language: String? = sharedPreferences?.getString(Locale_KeyValue, "")
         language?.let { changeLocale(it) }
-        Log.d("languagess",language.toString())
+        Log.d("languagess", language.toString())
     }
 
     override fun onDestroy() {

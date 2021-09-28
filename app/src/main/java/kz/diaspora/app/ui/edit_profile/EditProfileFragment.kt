@@ -1,33 +1,50 @@
 package kz.diaspora.app.ui.edit_profile
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.DialogInterface
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.recreate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import kz.diaspora.app.R
 import kz.diaspora.app.data.db.PrefsImpl
 import kz.diaspora.app.databinding.FragmentEditProfileBinding
+import kz.diaspora.app.domain.model.Language
 import kz.diaspora.app.domain.model.User
+import kz.diaspora.app.ui.custom_views.languages.OnLangItemClickListener
+import kz.diaspora.app.ui.edit_profile.adapter.LangAdapter
 import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetCallback
 import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetDialogFragment
+import kz.diaspora.app.utils.updateResources
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, View.OnClickListener {
+class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, DialogInterface{
 
     private val TAG: String = this::class.java.simpleName
     private val viewModel: EditProfileViewModel by viewModels()
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
+    private val Locale_Preference = "Locale Preference"
+    private val Locale_KeyValue = "Saved Locale"
+    private var sharedPreferences: SharedPreferences? = null
+    private var editor: SharedPreferences.Editor? = null
+    private var myLocale: Locale? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,15 +61,67 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, View.OnCli
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         setObservers()
         setListeners()
-        binding.spLang.setOnClickListener(this)
+       /* initViews()*/
+        //loadLocale()
+        /* setSpinner()*/
+        /*setLocale(viewModel.prefsImpl.getLanguage())*/
+
+        binding.spLang.setOnClickListener {
+           sp_lang.slideUp()
+        }
+
+//        setButtonLang(viewModel.prefsImpl.getLanguage())
+//
+//        sp_lang.setLanguage(viewModel.prefsImpl.getLanguage())
+//
+//        sp_lang.onLangItemClickListener = this
     }
 
-    private fun initView() {
-
+    /*@SuppressLint("CommitPrefEdits")
+    private fun initViews() {
+        sharedPreferences = requireActivity().getSharedPreferences(Locale_Preference, Activity.MODE_PRIVATE)
+        editor = sharedPreferences!!.edit()
     }
+*//*
+    override fun langItemClick(lang: String) {
+        changeLocale(lang) //Change Locale on selection basis
+        if (binding.btSave != null) {
+            setButtonLang(lang)
+        }
+    }
+
+    //Change Locale
+    fun changeLocale(lang: String) {
+        myLocale = Locale(lang) //Set Selected Locale
+        saveLocale(lang) //Save the selected locale
+        Locale.setDefault(myLocale) //set new locale as default
+        val config = Configuration() //get Configuration
+        config.locale = myLocale //set config locale as selected locale
+        requireContext().getResources().updateConfiguration(config, requireContext().getResources().getDisplayMetrics()) //Update the config
+    }
+
+    fun saveLocale(lang: String?) {
+        editor?.putString(Locale_KeyValue, lang)
+        editor?.commit()
+    }
+
+    //Get locale method in preferences
+    fun loadLocale() {
+        val language: String? = sharedPreferences?.getString(Locale_KeyValue, "")
+        language?.let { changeLocale(it) }
+        Log.d("languagessss",language.toString())
+    }
+
+
+    private fun setButtonLang(lang: String) {
+        when (lang) {
+            "ru" -> binding.btSave.text = getString(R.string.save_ru)
+
+            "en" -> binding.btSave.text = getString(R.string.save_en)
+        }
+    }*/
 
     private fun setObservers() {
         with(viewModel) {
@@ -81,31 +150,12 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, View.OnCli
                 binding.etSurname.setText(it.surname)
                 binding.etPhone.setText(it.phone_number)
 
-//                if (it.gender == null) {
-//                    binding.rbFemale.isChecked = false
-//                    binding.rbMale.isChecked = false
-//                } else if (it.gender!!.equals("male")) {
-//                    binding.rbFemale.isChecked = false
-//                    binding.rbMale.isChecked = true
-//                } else if (it.gender!!.equals("female")) {
-//                    binding.rbFemale.isChecked = true
-//                    binding.rbMale.isChecked = false
-//                }
-
                 var format = it.birthday.toString().split(" ")[0].split("-")
                 try {
                     binding.etBirthDate.updateDate(Integer.parseInt(format[0]), Integer.parseInt(format[1]),Integer.parseInt(format[2]))
                 } catch (e: Exception) {
 
                 }
-
-              /*  binding.spLang.setOnClickListener {
-                val bottomSheetFragment =
-                    LanguagesBottomSheetDialogFragment(viewModel.prefsImpl, activity,this@EditProfileFragment)
-                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
-            }*/
-
-
 
                 if (it.marital_status == null || !isNumber(it.marital_status)) {
                     binding.spStatus.setSelection(0)
@@ -200,23 +250,23 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, View.OnCli
         return if (s.isNullOrEmpty()) false else s.all { Character.isDigit(it) }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     override fun languageClicked() {
         activity?.onConfigurationChanged(activity?.applicationContext!!.resources!!.configuration)
         activity?.recreate()
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.sp_lang -> {
-                val bottomSheetFragment =
-                    LanguagesBottomSheetDialogFragment(viewModel.prefsImpl, activity, this)
-                bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
-            }
-        }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+
+    override fun cancel() {
+
+    }
+
+    override fun dismiss() {
+
     }
 }

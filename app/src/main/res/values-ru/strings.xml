@@ -16,6 +16,8 @@
     <string name="popular">Популярное</string>
     <string name="russian">Русский</string>
     <string name="kazakh">Қазақша</string>
+    <string name = "save_ru"> Сохранить </string>
+    <string name = "save_en"> Save </string>
     <string name="english">English</string>
     <string name="text_continue">Продолжить</string>
     <string name="select_rating">Выберите оценку</string>
@@ -299,4 +301,6 @@
     <string name="view_">Посмотреть</string>
     <string name="chat_users">В этом чате нету пользовотелей</string>
     <string name="Contact_support">Написать в службу поддержки</string>
+    <string name="Choose_your_language">Выберите ваш язык</string>
+    <string name="choose_language">Выберите язык</string>
 </resources>

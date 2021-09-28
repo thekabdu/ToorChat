@@ -1,6 +1,7 @@
 package kz.diaspora.app.ui.profile
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,7 +19,9 @@ import kz.diaspora.app.R
 import kz.diaspora.app.databinding.FragmentProfileBinding
 import kz.diaspora.app.ui.MainActivity
 import kz.diaspora.app.ui.StartActivity
+import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetCallback
 import kz.diaspora.app.ui.my_adverts.MyAdvertType
+import kz.diaspora.app.utils.setLocale
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import pl.aprilapps.easyphotopicker.MediaFile
@@ -26,7 +29,7 @@ import pl.aprilapps.easyphotopicker.MediaSource
 import java.io.File
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(),LanguagesBottomSheetCallback {
 
     private val TAG: String = this::class.java.simpleName
 
@@ -233,11 +236,17 @@ class ProfileFragment : Fragment() {
                 })
     }
 
+
+
     override fun onResume() {
         super.onResume()
         viewModel.getPostsCount()
         viewModel.getUserData()
         setObservers()
+    }
+    override fun languageClicked() {
+        activity?.onConfigurationChanged(activity?.applicationContext!!.resources!!.configuration)
+        activity?.recreate()
     }
 
     override fun onDestroy() {

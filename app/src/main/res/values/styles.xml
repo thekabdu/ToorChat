@@ -165,4 +165,9 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="Smaller_Drawable">
+        <item name="android:textSize">20sp</item>
+        <item name="android:scaleX">0.8</item>
+        <item name="android:scaleY">0.8</item>
+    </style>
 </resources>

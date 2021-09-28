@@ -9,14 +9,14 @@ import kz.diaspora.app.R
 
 
 class LanguagesSpinner @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     var onLangItemClickListener: OnLangItemClickListener? = null
     private var droppedDown = false
-    private val data = mutableListOf("RU", "ENG")
+    private val data = mutableListOf("Русский", "Англиский")
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_language_spinner, this)
@@ -53,16 +53,16 @@ class LanguagesSpinner @JvmOverloads constructor(
 
     fun slideUp() {
         tv_selected_lang.setCompoundDrawablesWithIntrinsicBounds(
-            0,
-            0,
-            R.drawable.ic_chevron_down,
-            0
+                0,
+                0,
+                R.drawable.ic_chevron_down,
+                0
         )
         ll_dropdown.animate().translationY(-400f).setDuration(300).start()
     }
 
     fun slideDown() {
-        tv_selected_lang.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_chevron_down, 0)
+        tv_selected_lang.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_chevron_up, 0)
         ll_dropdown.animate().translationY(0f).setDuration(300).start()
     }
 
@@ -84,10 +84,10 @@ class LanguagesSpinner @JvmOverloads constructor(
 
     private fun getLangCode(lang: String): String {
         return when (lang) {
-            "RU" -> {
+            "Русский" -> {
                 "ru"
             }
-            "ENG" -> {
+            "Англиский" -> {
                 "en"
             }
             else -> {
