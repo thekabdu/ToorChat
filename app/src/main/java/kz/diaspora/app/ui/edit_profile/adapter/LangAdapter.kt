@@ -23,7 +23,7 @@ class LangAdapter(var context: Context, private var languageList: ArrayList<Lang
         val language = languageList.get(position)
         val row = (context as ContextWrapper).layoutInflater.inflate(R.layout.lang_list_item, viewGroup, false)
         val tvName = row.findViewById(R.id.txt_lang_name) as TextView
-        val iconImg = row.findViewById(R.id.ic_lang) as ImageView
+      /*  val iconImg = row.findViewById(R.id.ic_lang) as ImageView*/
 
         tvName.text = language.name
        /* iconImg.baseline = language.icon!!*/

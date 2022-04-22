@@ -1,29 +1,21 @@
 package kz.diaspora.app.ui
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.core.App
 import kz.diaspora.app.databinding.ActivityMainBinding
-import kz.diaspora.app.databinding.ItemUsersInChatBinding
-import kz.diaspora.app.domain.model.ChatModel
-import kz.diaspora.app.ui.messages.users_in_chat.UsersInChatFragment
 import kz.diaspora.app.utils.setLocale
 import kz.diaspora.app.utils.setupWithNavController
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -57,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         binding.tvToolbar.text = title
     }
 
-
     public fun setToolbarLike(vis: Boolean) {
         if (vis) binding.ivLike.visibility = View.VISIBLE
         else binding.ivLike.visibility = View.GONE
@@ -77,23 +68,16 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setListeners() {
-//        binding.ivLike.setOnClickListener {
-//            if (binding.ivLike.getDrawable().getConstantState() == baseContext?.getResources()?.getDrawable(R.drawable.ic_like_active)?.getConstantState()) {
-//                binding.ivLike.setImageResource(R.drawable.ic_like)
-//            }
-//            else binding.ivLike.setImageResource(R.drawable.ic_like_active)
-//        }
+
     }
 
     private fun setupBottomNavigationBar() {
-
-        val navGraphIds = listOf(R.navigation.tab1, R.navigation.tab2, R.navigation.tab3, R.navigation.tab4)
-
+        val navGraphIds = listOf(R.navigation.tab1, R.navigation.tab2, R.navigation.tab3, R.navigation.tab4,R.navigation.tab5)
         val controller = binding.bnvNavigation.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_container,
-            intent = intent
+                navGraphIds = navGraphIds,
+                fragmentManager = supportFragmentManager,
+                containerId = R.id.nav_host_container,
+                intent = intent
         )
 
         controller.observe(this, { navController ->
@@ -111,6 +95,13 @@ class MainActivity : AppCompatActivity() {
         NavController.OnDestinationChangedListener { controller, destination, arguments ->
             binding.toolbar.setNavigationIcon(R.drawable.ic_back_arrow_black)
             when (destination.id) {
+                R.id.item_profile -> {
+                    setToolbarTitle("")
+                    setToolbarLike(false)
+                    setToolbarEndText("")
+                    binding.toolbar.visibility = View.GONE
+                    binding.toolbar.navigationIcon = null
+                }
                 R.id.item_home -> {
                     setToolbarTitle("")
                     setToolbarLike(false)
@@ -123,14 +114,12 @@ class MainActivity : AppCompatActivity() {
                     setToolbarLike(false)
                     setToolbarEndText("")
                     binding.toolbar.visibility = View.VISIBLE
-
-
                 }
                 R.id.item_users_list -> {
                     setToolbarTitle("")
                     setToolbarEndText("")
                     binding.toolbar.visibility = View.VISIBLE
-                   // binding.toolbar.navigationIcon = null
+                    // binding.toolbar.navigationIcon = null
                 }
                 R.id.item_notifications -> {
                     setToolbarTitle("")
@@ -139,19 +128,12 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.visibility = View.VISIBLE
                     binding.toolbar.navigationIcon = null
                 }
-                R.id.item_profile -> {
-                    setToolbarTitle("")
-                    setToolbarLike(false)
-                    setToolbarEndText("")
-                    binding.toolbar.visibility = View.GONE
-                    binding.toolbar.navigationIcon = null
-                }
                 R.id.item_profile_info -> {
                     setToolbarTitle("")
                     setToolbarLike(false)
                     setToolbarEndText("")
                     binding.toolbar.visibility = View.VISIBLE
-//                    binding.toolbar.navigationIcon = null
+//                  binding.toolbar.navigationIcon = null
                 }
                 R.id.item_chat -> {
                     setToolbarTitle("")

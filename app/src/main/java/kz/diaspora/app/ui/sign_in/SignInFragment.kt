@@ -15,11 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
+import kz.diaspora.app.SelectCountryFragment
 import kz.diaspora.app.databinding.FragmentSignInBinding
 import kz.diaspora.app.ui.MainActivity
 import kz.diaspora.app.ui.StartActivity
 import kz.diaspora.app.ui.forgot_password.ForgotPasswordFragment
 import kz.diaspora.app.ui.sign_up.SignUpFragment
+import kz.my_portfel.app.ui.pincode.DropPasswordFragment
 import java.util.*
 
 
@@ -62,13 +64,16 @@ class SignInFragment : Fragment() {
     private fun setObservers() {
         with(viewModel) {
             error.observe(viewLifecycleOwner, {
-                Toast.makeText(context, "${it?.error}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Вы ввели не правильный пароль или логин", Toast.LENGTH_LONG).show()
             })
 
             loginData.observe(viewLifecycleOwner, {
-                if (it.access_token.isNotEmpty()) {
+                if (it.access_token.isNotEmpty() && it.user.city_id != null ) {
                     startActivity(Intent(requireContext(), MainActivity::class.java))
                     (activity as StartActivity).finish()
+                }else if(it.user.city_id == null){
+                    (activity as StartActivity).addFragment(SelectCountryFragment())
+//                    Toast.makeText(context, "Выберите откуда вы и где вы находитесь", Toast.LENGTH_LONG).show()
                 }
             })
         }

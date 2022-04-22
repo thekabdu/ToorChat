@@ -103,9 +103,10 @@ class ChatFragment : Fragment(), ChatAdapter.OnProjectClickListener {
             messageData.observe(viewLifecycleOwner, {
                 adapter.clear()
                 viewModel.getChatsList()
+                if (adapter.isEmpty()){ Toast.makeText(context, "Заполните ячейку Откуда вы и Местоположение в профиле", Toast.LENGTH_LONG).show()}
             })
             error.observe(viewLifecycleOwner, {
-                Toast.makeText(context, "${it?.error}", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Заполните ячейку Откуда вы и Местоположение в профиле", Toast.LENGTH_LONG).show()
             })
         }
     }

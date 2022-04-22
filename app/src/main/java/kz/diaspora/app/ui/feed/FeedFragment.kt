@@ -10,17 +10,20 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.iid.FirebaseInstanceId
 //import com.github.nkzawa.socketio.client.IO
 //import com.github.nkzawa.socketio.client.Socket
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
+import kz.diaspora.app.SelectCountryFragment
 import kz.diaspora.app.data.cloud.firebase.Constants
 import kz.diaspora.app.data.cloud.firebase.Constants.Companion.BASE_URL
 import kz.diaspora.app.data.cloud.firebase.Constants.Companion.FIREBASE_DEVICE_TOKEN
@@ -29,8 +32,11 @@ import kz.diaspora.app.data.cloud.firebase.FirebaseService
 import kz.diaspora.app.databinding.FragmentFeedBinding
 import kz.diaspora.app.domain.model.CategoryModel
 import kz.diaspora.app.domain.model.PostModel
+import kz.diaspora.app.ui.StartActivity
 import kz.diaspora.app.ui.feed.adapter.CategoriesAdapter
 import kz.diaspora.app.ui.feed.adapter.FeedAdapter
+import kz.diaspora.app.ui.forgot_password.ForgotPasswordFragment
+import kz.diaspora.app.ui.profile.ProfileFragment
 import kz.diaspora.app.utils.EndlessRecyclerViewScrollListener
 import kz.diaspora.app.utils.setDivider
 import org.json.JSONObject
@@ -90,6 +96,7 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
         scrollListener = object : EndlessRecyclerViewScrollListener(mLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
                 viewModel.getPosts(currentCategory)
+
             }
         }
         binding.rvFeed.addOnScrollListener(scrollListener)
@@ -103,6 +110,15 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
 
     private fun setObservers() {
         with(viewModel) {
+            loginData.observe(viewLifecycleOwner, {
+                if(it.user.city_id == null){
+                    val fragment = ProfileFragment()
+                    val fragmentTransaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                    fragmentTransaction.replace(R.id.content, fragment, "")
+                    fragmentTransaction.commit()
+                    Toast.makeText(context, "Выберите откуда вы и где вы находитесь", Toast.LENGTH_LONG).show()
+                }
+            })
 //            roomsData.observe(viewLifecycleOwner, {
 //                initSocket()
 //            })
@@ -111,12 +127,21 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
             })
             advertsData.observe(viewLifecycleOwner, {
                 if (it.isNotEmpty()) addItemsByFilterSearch(it)
+                binding.noValue.visibility = View.GONE
+                if (it.isEmpty())     binding.noValue.visibility = View.VISIBLE
+
             })
             messageData.observe(viewLifecycleOwner, {
 
             })
+
+
+
+
+
             error.observe(viewLifecycleOwner, {
-                Toast.makeText(context, "${it?.error}", Toast.LENGTH_LONG).show()
+
+             //   Toast.makeText(context, "${it?.error}", Toast.LENGTH_LONG).show()
             })
         }
     }
@@ -152,8 +177,10 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
                 Constants.BASE_URL,
                 params,
                 {
-                    Toast.makeText(activity, "Push Notification Success", Toast.LENGTH_LONG).show()
-                }, { Toast.makeText(activity, "Push Notification Failed", Toast.LENGTH_LONG).show() }
+                  //  Toast.makeText(activity, "Push Notification Success", Toast.LENGTH_LONG).show()
+                },
+            { //Toast.makeText(activity, "Push Notification Failed", Toast.LENGTH_LONG).show()
+                 }
         ) {
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
@@ -165,13 +192,12 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
         volleyQueue.add(request)
     }
 
-
-
     private fun addItemsByFilterSearch(posts: List<PostModel>?) {
         val searchText = binding.etSearch.text.toString()
         adapter.clear()
         if (posts != null) {
             if (searchText.isEmpty()) adapter.add(posts)
+
             else {
                 for (i in posts.indices) {
                     val post = posts[i]
@@ -179,6 +205,7 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
                         adapter.add(post)
                     }
                 }
+                binding.noValue.visibility = View.VISIBLE
             }
         }
     }
@@ -206,8 +233,12 @@ class FeedFragment : Fragment(), FeedAdapter.OnFeedClickListener,
     override fun onCategoryClick(categoryModel: CategoryModel) {
         viewModel.getPosts(categoryModel.id)
         currentCategory = categoryModel.id
+
         adapter.clear()
+
     }
+
+
 
     override fun onResume() {
         super.onResume()

@@ -3,6 +3,7 @@ package kz.diaspora.app.data.cloud.rest
 import kz.diaspora.app.data.cloud.firebase.Constants.Companion.CONTENT_TYPE
 import kz.diaspora.app.data.cloud.firebase.Constants.Companion.SERVER_KEY
 import kz.diaspora.app.domain.model.*
+import kz.diaspora.app.domain.model.requests.ForgotResetPassword
 import kz.diaspora.app.domain.model.requests.LoginUserRequest
 import kz.diaspora.app.domain.model.requests.RegisterUserRequest
 import kz.diaspora.app.domain.model.requests.SendCommentRequest
@@ -46,6 +47,15 @@ interface ApiService {
 
 //    @GET("api/posts")
 //    suspend fun getPostList(): List<PostModel>
+
+    @POST("api/forgot/email")
+    suspend fun forgotEmail(@Body userRequestData: ForgotEmail): UserWithToken
+
+    @POST("api/check/forgot/code")
+    suspend fun forgotCode(@Body userRequestData: ForgotCode): UserWithToken
+
+    @POST("api/password/reset")
+    suspend fun forgotPasswordReset(@Body userRequestData: ForgotResetPassword): UserWithToken
 
     @GET("api/posts")
     suspend fun getPostList(@Query("category_id") category_id: Int?): List<PostModel>

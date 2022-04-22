@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab5"
+    app:startDestination="@id/selectCountryFragment">
+
+    <fragment
+        android:id="@+id/selectCountryFragment"
+        android:name="kz.diaspora.app.SelectCountryFragment"
+        android:label="select_country_fragment"
+        tools:layout="@layout/select_country_fragment" >
+        <action
+            android:id="@+id/to_newSelectLocationCountryFragment"
+            app:destination="@id/newSelectLocationCountryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newSelectLocationCountryFragment"
+        android:name="kz.diaspora.app.NewSelectLocationCountryFragment"
+        android:label="new_select_location_country_fragment"
+        tools:layout="@layout/new_select_location_country_fragment" >
+        <action
+            android:id="@+id/to_newSelectCityFragment"
+            app:destination="@id/newSelectCityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newSelectCityFragment"
+        android:name="kz.diaspora.app.NewSelectCityFragment"
+        android:label="new_select_city_fragment"
+        tools:layout="@layout/new_select_city_fragment" />
+</navigation>

@@ -17,12 +17,13 @@ class FeedViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val TAG = this::class.java.simpleName
-    val isRefreshing: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
+    val isRefreshing: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(true) }
     val advertsData: MutableLiveData<List<PostModel>> by lazy { MutableLiveData<List<PostModel>>() }
     val categoriesData: MutableLiveData<CategoryList> by lazy { MutableLiveData<CategoryList>() }
     val chatsData: MutableLiveData<List<ChatModel>> by lazy { MutableLiveData<List<ChatModel>>() }
     val roomsData: MutableLiveData<List<String>> by lazy { MutableLiveData<List<String>>() }
     val messageData: MutableLiveData<StatusModel> by lazy { MutableLiveData<StatusModel>() }
+    val loginData: MutableLiveData<UserWithToken> by lazy { MutableLiveData<UserWithToken>() }
     val DeviceTokenData: MutableLiveData<UserWithToken> by lazy { MutableLiveData<UserWithToken>() }
     val error: MutableLiveData<ResultWrapper.Error> by lazy { MutableLiveData<ResultWrapper.Error>() }
 

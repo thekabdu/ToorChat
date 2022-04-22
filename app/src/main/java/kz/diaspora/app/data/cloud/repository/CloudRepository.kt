@@ -6,6 +6,7 @@ import kz.diaspora.app.data.cloud.ResultWrapper
 import kz.diaspora.app.data.cloud.rest.ApiService
 import kz.diaspora.app.data.cloud.safeApiCall
 import kz.diaspora.app.domain.model.*
+import kz.diaspora.app.domain.model.requests.ForgotResetPassword
 import kz.diaspora.app.domain.model.requests.LoginUserRequest
 import kz.diaspora.app.domain.model.requests.RegisterUserRequest
 import kz.diaspora.app.domain.model.requests.SendCommentRequest
@@ -116,6 +117,27 @@ class CloudRepository(
         val requestBody = RegisterUserRequest(username, password, name, surname, phone_or_email)
         return safeApiCall(dispatcher) {
             api.register(requestBody)
+        }
+    }
+
+    override suspend fun forgotEmail(email: String): ResultWrapper<UserWithToken> {
+        val requestBody = ForgotEmail(email)
+        return safeApiCall(dispatcher) {
+            api.forgotEmail(requestBody)
+        }
+    }
+
+    override suspend fun forgotCode(email: String, two_factor_code: Int): ResultWrapper<UserWithToken> {
+        val requestBody = ForgotCode(email,two_factor_code)
+        return safeApiCall(dispatcher) {
+            api.forgotCode(requestBody)
+        }
+    }
+
+    override suspend fun forgotRest(email: String, password: String, password_confirmation: String): ResultWrapper<UserWithToken> {
+        val requestBody = ForgotResetPassword(email,password, password_confirmation)
+        return safeApiCall(dispatcher) {
+            api.forgotPasswordReset(requestBody)
         }
     }
 

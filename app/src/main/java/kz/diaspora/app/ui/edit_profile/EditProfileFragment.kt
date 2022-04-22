@@ -24,10 +24,12 @@ import kz.diaspora.app.data.db.PrefsImpl
 import kz.diaspora.app.databinding.FragmentEditProfileBinding
 import kz.diaspora.app.domain.model.Language
 import kz.diaspora.app.domain.model.User
+import kz.diaspora.app.ui.StartActivity
 import kz.diaspora.app.ui.custom_views.languages.OnLangItemClickListener
 import kz.diaspora.app.ui.edit_profile.adapter.LangAdapter
 import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetCallback
 import kz.diaspora.app.ui.edit_profile.languages.LanguagesBottomSheetDialogFragment
+import kz.diaspora.app.ui.splashscreen.Splash1Fragment
 import kz.diaspora.app.utils.updateResources
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -42,8 +44,8 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, DialogInte
     private val binding get() = _binding!!
     private val Locale_Preference = "Locale Preference"
     private val Locale_KeyValue = "Saved Locale"
-    private var sharedPreferences: SharedPreferences? = null
-    private var editor: SharedPreferences.Editor? = null
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     private var myLocale: Locale? = null
 
     override fun onCreateView(
@@ -63,7 +65,8 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, DialogInte
         super.onViewCreated(view, savedInstanceState)
         setObservers()
         setListeners()
-       /* initViews()*/
+        initViews()
+
         //loadLocale()
         /* setSpinner()*/
         /*setLocale(viewModel.prefsImpl.getLanguage())*/
@@ -78,6 +81,30 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, DialogInte
 //
 //        sp_lang.onLangItemClickListener = this
     }
+
+
+    @SuppressLint("CommitPrefEdits")
+    private fun initViews() {
+        sharedPreferences = requireActivity().getSharedPreferences(Locale_Preference, Activity.MODE_PRIVATE)
+        editor = sharedPreferences!!.edit()
+    }
+
+ /*   override fun onClick(view: View) {
+        var lang = "ru"
+        when (view.id) {
+            R.id.txt_use -> {
+                lang = "en"
+                (activity as StartActivity).replaceFragment(Splash1Fragment())
+            }
+            R.id.txt_rus -> {
+                lang = "ru"
+                (activity as StartActivity).replaceFragment(Splash1Fragment())
+            }
+        }
+        changeLocale(lang) //Change Locale on selection basis
+    }*/
+
+
 
     /*@SuppressLint("CommitPrefEdits")
     private fun initViews() {
@@ -149,6 +176,8 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, DialogInte
                 binding.etName.setText(it.name)
                 binding.etSurname.setText(it.surname)
                 binding.etPhone.setText(it.phone_number)
+                binding.etEmail.setText(it.email)
+                binding.etLogin.setText(it.username)
 
                 var format = it.birthday.toString().split(" ")[0].split("-")
                 try {
@@ -209,7 +238,8 @@ class EditProfileFragment : Fragment(), LanguagesBottomSheetCallback, DialogInte
                 user.name = binding.etName.text.toString()
                 user.surname = binding.etSurname.text.toString()
                 user.phone_number = binding.etPhone.text.toString()
-
+                user.username = binding.etLogin.text.toString()
+                user.email = binding.etEmail.text.toString()
                 if (binding.rbMale.isChecked)
                     user.gender = "male"
 

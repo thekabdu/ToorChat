@@ -9,9 +9,6 @@
             type="kz.diaspora.app.ui.messages.MessagesViewModel" />
     </data>
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,6 +21,7 @@
             app:is_refreshing="@{viewModel.isRefreshing}"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="16dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@+id/et_message">
 
             <androidx.recyclerview.widget.RecyclerView

@@ -8,10 +8,7 @@ import kz.diaspora.app.core.BaseViewModel
 import kz.diaspora.app.data.cloud.ResultWrapper
 import kz.diaspora.app.data.cloud.repository.BaseCloudRepository
 import kz.diaspora.app.data.db.PrefsImpl
-import kz.diaspora.app.domain.model.ChatModel
-import kz.diaspora.app.domain.model.MessagesModel
-import kz.diaspora.app.domain.model.StatusModel
-import kz.diaspora.app.domain.model.User
+import kz.diaspora.app.domain.model.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +22,7 @@ class UsersInChatViewModel @Inject constructor(
     val usersListData: MutableLiveData<List<User>> by lazy { MutableLiveData<List<User>>() }
     val status: MutableLiveData<StatusModel> by lazy { MutableLiveData<StatusModel>() }
     val messagesData: MutableLiveData<MessagesModel> by lazy { MutableLiveData<MessagesModel>() }
+    val loginData: MutableLiveData<UserWithToken> by lazy { MutableLiveData<UserWithToken>() }
     val error: MutableLiveData<ResultWrapper.Error> by lazy { MutableLiveData<ResultWrapper.Error>() }
 
     init {

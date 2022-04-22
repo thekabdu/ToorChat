@@ -7,13 +7,18 @@ import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.databinding.FragmentSignUpBinding
 import kz.diaspora.app.ui.MainActivity
 import kz.diaspora.app.ui.StartActivity
+import kz.diaspora.app.ui.forgot_password.ForgotPasswordFragment
+import kz.diaspora.app.ui.profile.ProfileFragment
 import kz.diaspora.app.ui.sign_in.AboutBSFragment
+import kz.diaspora.app.ui.sign_in.SignInFragment
 
 
 @AndroidEntryPoint
@@ -54,13 +59,20 @@ class SignUpFragment : Fragment() {
     private fun setObservers() {
         with(viewModel) {
             error.observe(viewLifecycleOwner, {
-                Toast.makeText(context, "${it?.error}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "${it?.status}", Toast.LENGTH_LONG).show()
+//                Toast.makeText(
+//                    context,
+//                    "Заполните ячейку Откуда вы и Местоположение",
+//                    Toast.LENGTH_LONG
+//                ).show()
             })
 
             loginData.observe(viewLifecycleOwner, {
                 if (it.access_token.isNotEmpty()) {
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    (activity as StartActivity).finish()
+                    (activity as StartActivity).addFragment(SignInFragment())
+                        Toast.makeText(activity, "Поздравлям Вы создали аккаунт", Toast.LENGTH_LONG).show()
+
+
                 }
             })
         }
@@ -73,17 +85,14 @@ class SignUpFragment : Fragment() {
                 binding.etPassword.text.toString(),
                 binding.etNameSurname.text.toString(),
                 binding.etNameName.text.toString(),
-
-                // .split(" ")[1]
                 binding.etLogin.text.toString()
-
             )
         }
         binding.btnSignIn.setOnClickListener {
             activity?.onBackPressed()
         }
         binding.txtIAgreeConf.setOnClickListener {
-            val url = "https://drive.google.com/file/d/1kbIH1shtAdsGMGp-jcVsfxKoqsOaDVwK/view"
+            val url = "https://diaspora.direct/storage/img/theme/soglashenie.pdf"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)

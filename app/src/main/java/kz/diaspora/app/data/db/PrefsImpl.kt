@@ -212,6 +212,8 @@ class PrefsImpl @Inject constructor(appContext: Context) : Prefs {
         val editor = prefs.edit()
         editor.putString(TOKEN, null)
         editor.putString(USER, null)
+        editor.putString(CITY, null)
+        editor.putString(COUNTRY, null)
         editor.apply()
     }
 }

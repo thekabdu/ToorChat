@@ -1,5 +1,6 @@
 package kz.diaspora.app.ui.messages.users_in_chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,10 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kz.diaspora.app.R
 import kz.diaspora.app.databinding.UsersInChatFragmentBinding
 import kz.diaspora.app.domain.model.User
+import kz.diaspora.app.ui.MainActivity
+import kz.diaspora.app.ui.StartActivity
 import kz.diaspora.app.ui.chats.ChatFragment
 import kz.diaspora.app.ui.chats.ChatFragmentDirections
+import kz.diaspora.app.ui.location.LocationCountryFragment
 import kz.diaspora.app.ui.messages.MessagesFragmentArgs
 import kz.diaspora.app.ui.messages.users_in_chat.adapter.UsersInChatAdapter
+import kz.diaspora.app.ui.profile.ProfileFragment
 
 @AndroidEntryPoint
 class UsersInChatFragment : Fragment(), UsersInChatAdapter.OnProjectClickListener {
@@ -85,6 +90,7 @@ class UsersInChatFragment : Fragment(), UsersInChatAdapter.OnProjectClickListene
             binding.tvNull.visibility = View.VISIBLE
 
             usersListData.observe(viewLifecycleOwner, {
+
                 binding.tvNull.visibility = View.GONE
                 adapter.clear()
                 adapter.add(it)
@@ -95,14 +101,6 @@ class UsersInChatFragment : Fragment(), UsersInChatAdapter.OnProjectClickListene
                     }
                 })
 
-
-                /*viewModel.usersListData.value?.let { it1 -> adapter.add(it1) }
-                binding.tvNull.visibility = View.GONE*/
-
-               /* if (adapter.itemCount == 0) binding.tvNull.visibility = View.VISIBLE
-                (activity as AppCompatActivity).supportActionBar?.title = ""
-                args.model.chat_name?.let { it1 -> (activity as MainActivity).setToolbarTitle(it1) }
-            })*/
                 error.observe(viewLifecycleOwner, {
                 Toast.makeText(context, "${it?.error}", Toast.LENGTH_LONG).show()
             })
@@ -112,7 +110,7 @@ class UsersInChatFragment : Fragment(), UsersInChatAdapter.OnProjectClickListene
 
 
     override fun onEnterClick(user: User, position: Int) {
-        val action = UsersInChatFragmentDirections.toProfileInfoFragment (viewModel.usersListData.value?.get(0)!!.id.toString())
+        val action = UsersInChatFragmentDirections.toProfileInfoFragment(viewModel.usersListData.value?.get(0)!!.id.toString())
         Navigation.findNavController(requireView()).navigate(action)
     }
 

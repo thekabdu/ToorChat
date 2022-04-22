@@ -192,9 +192,10 @@ class EditPostFragment : Fragment() {
 
         binding.chooseFile.setOnClickListener {
             easyImage = EasyImage.Builder(requireContext())
+                    .allowMultiple(true)
                 .setCopyImagesToPublicGalleryFolder(true)
                 .setFolderName("diaspora")
-                .allowMultiple(false)
+
                 .build()
             easyImage.openChooser(this)
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Diaspora</string>
+    <string name="app_name">Toor Chat</string>
     <string name="loading">Wait, please...</string>
     <string name="nav_item_qr">Scan QR</string>
     <string name="nav_item_main">Catalog</string>
@@ -276,7 +276,7 @@ Login </string>
     <string name = "not_active"> Inactive </string>
     <string name = "create_advert"> Create ad </string>
     <string name = "edit_post"> Edit post </string>
-    <string name="welcome_to_the_world">Welcome to the world of Diaspora</string>
+    <string name="welcome_to_the_world">Welcome to the world</string>
     <string name="welcome_to_the_world_ru">Добро пожаловать в мир Diaspora</string>
     <string name="welcome_to_the_world_en">Welcome to the world of Diaspora</string>
     <string name="Next">Next</string>
@@ -285,7 +285,7 @@ Login </string>
     <string name="this_platform_search">It is a platform for finding and communicating compatriots abroad</string>
     <string name="splash_text_3">Here you can find fellow countrymen, provide or ask for advice or assistance, offer your services!</string>
     <string name="splash_text_4">Distance brings us closer!</string>
-    <string name="telephone_or_email">Phone number or mail address</string>
+    <string name="telephone_or_email">Mail address</string>
     <string name="chose_where_u_from">Select \ Where are you from? \ And your current \ Location \</string>
     <string name="no_chat">There are no chats in this region</string>
     <string name="location">Location</string>
@@ -297,4 +297,5 @@ Login </string>
     <string name="Contact_support">Contact support</string>
     <string name="Choose_your_language">Choose your language</string>
     <string name="choose_language">Choose language</string>
+    <string name="send_code_email">Отправить код</string>
 </resources>

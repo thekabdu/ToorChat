@@ -114,9 +114,10 @@ class MessagesFragment : Fragment(), MessagesAdapter.OnMessageClickListener {
         println("rooms " + room)
 
         try {
-            socket = IO.socket("http://diaspora.direct:3000")
+            socket = IO.socket("http://45.147.197.44/")
         } catch (e: Exception) {
             e.printStackTrace()
+            println("connect")
         }
 
         socket!!.connect()

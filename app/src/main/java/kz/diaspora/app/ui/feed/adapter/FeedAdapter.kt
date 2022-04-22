@@ -1,10 +1,12 @@
 package kz.diaspora.app.ui.feed.adapter
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -64,6 +66,21 @@ class FeedAdapter @Inject constructor(
             dataBinding.btnSendComment.setOnClickListener {
                 listener.onSendClick(t, dataBinding.etComment.text.toString())
                 dataBinding.etComment.text.clear()
+            }
+            dataBinding.ivReport.setOnClickListener {
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Вниемание")
+                builder.setMessage("Вы действительно хотите отправить жалобу на обьявление?")
+                builder.setPositiveButton("Да") { dialog, which ->
+                    Toast.makeText(context,
+                            "Вы отправили жалобу, Модератор рассмотрит в течений дня", Toast.LENGTH_LONG).show()
+                }
+
+                builder.setNegativeButton("Нет") { dialog, which ->
+                    //Toast.makeText(context, android.R.string.no, Toast.LENGTH_SHORT).show()
+                }
+                builder.show()
+
             }
             dataBinding.ivLike.setOnClickListener {
                 if (t.is_favourite) {

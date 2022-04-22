@@ -39,6 +39,21 @@ interface BaseCloudRepository {
         phone_or_email: String
     ): ResultWrapper<UserWithToken>
 
+    suspend fun forgotEmail(
+            email: String
+    ): ResultWrapper<UserWithToken>
+
+    suspend fun forgotCode(
+            email: String,
+            two_factor_code: Int
+    ): ResultWrapper<UserWithToken>
+
+    suspend fun forgotRest(
+            email: String,
+            password: String,
+            password_confirmation: String
+    ): ResultWrapper<UserWithToken>
+
     suspend fun editUser(user: User): ResultWrapper<User>
 
     suspend fun getStatuses(): ResultWrapper<List<MaritalStatusModel>>

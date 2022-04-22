@@ -33,10 +33,6 @@ class StartActivity : AppCompatActivity() {
 
     fun addFragment(fragment: Fragment) {
         fm.beginTransaction()
-//                .setCustomAnimations(R.anim.fade_in,
-//                        R.anim.fade_out,
-//                        R.anim.fade_in,
-//                        R.anim.fade_out)
                 .add(R.id.fl_content, fragment)
                 .addToBackStack(fragment.tag)
                 .commit()

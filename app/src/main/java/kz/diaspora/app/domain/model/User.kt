@@ -8,7 +8,7 @@ data class User(
     @SerializedName("city_id") val city_id: Any?,
     @SerializedName("created_at") val created_at: String?,
     @SerializedName("ctrunity_id") val ctrunity_id: Any?,
-    @SerializedName("email") val email: String?,
+    @SerializedName("email") var email: String?,
     @SerializedName("email_verified_at") val email_verified_at: Any?,
     @SerializedName("facebook") var facebook: String?,
     @SerializedName("gender") var gender: Any?,
@@ -25,7 +25,7 @@ data class User(
     @SerializedName("telegram") var telegram: String?,
     @SerializedName("twitter") val twitter: String?,
     @SerializedName("updated_at") val updated_at: String,
-    @SerializedName("username") val username: String,
+    @SerializedName("username") var username: String,
     @SerializedName("viber") var viber: String?,
     @SerializedName("whatsapp") var whatsapp: String?
 )

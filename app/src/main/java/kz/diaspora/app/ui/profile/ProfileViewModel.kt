@@ -114,6 +114,7 @@ class ProfileViewModel @Inject constructor(
         launchIO {
             isRefreshing.postValue(true)
             prefsImpl.logOut()
+
             authData.postValue(false)
             isRefreshing.postValue(false)
         }

@@ -50,7 +50,6 @@ class EditProfileViewModel @Inject constructor(
                     statusData.postValue(data.value)
                 }
             }
-
             isRefreshing.postValue(false)
         }
     }
@@ -65,7 +64,6 @@ class EditProfileViewModel @Inject constructor(
                     prefsImpl.setUser(data.value)
                 }
             }
-
             isRefreshing.postValue(false)
         }
     }

@@ -75,7 +75,7 @@ class EditAdvertFragment : Fragment() {
                     Glide.with(requireContext())
                             .load(it.path)
                             .placeholder(R.drawable.ic_add_photo)
-                            .circleCrop()
+                            .override(200,200)
                             .into(binding.ivImage)
                     avatarFilePath = it.path
                     binding.etTitle.setText(it.title)
@@ -184,7 +184,7 @@ class EditAdvertFragment : Fragment() {
             easyImage = EasyImage.Builder(requireContext())
                     .setCopyImagesToPublicGalleryFolder(true)
                     .setFolderName("diaspora")
-                    .allowMultiple(false) //todo multiple
+                    .allowMultiple(true) //todo multiple
                     .build()
             easyImage.openChooser(this)
         }
@@ -203,9 +203,11 @@ class EditAdvertFragment : Fragment() {
                         avatarFilePath = imageFiles[0].file.path
                         Glide.with(requireContext())
                                 .load(avatarFilePath)
-                                .circleCrop()
+                                .override(500,500)
+//                                .circleCrop()
+                                .centerInside()
                                 .into(binding.ivImage)
-//                    avatarFilePath = imageFiles[0].file.path
+
                     }
 
                     override fun onImagePickerError(error: Throwable, source: MediaSource) {

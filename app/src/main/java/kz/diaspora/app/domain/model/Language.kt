@@ -3,9 +3,9 @@ package kz.diaspora.app.domain.model
 import kz.diaspora.app.R
 import java.io.Serializable
 
-class Language(icon: Int?, name: String, code: String) : Serializable {
+class Language( name: String, code: String) : Serializable {
 
-    var icon: Int? = icon
+
     var name: String? = name
     var code: String? = code
 
@@ -13,9 +13,9 @@ class Language(icon: Int?, name: String, code: String) : Serializable {
 
         fun getLanguageList(): ArrayList<Language> {
             val list = ArrayList<Language>()
-            list.add(Language(null,R.string.Choose_your_language.toString(), "en"))
-            list.add(Language(R.drawable.ic_america,"English", "en"))
-            list.add(Language(R.drawable.ic_russian, "Русский", "ru"))
+            list.add(Language(R.string.Choose_your_language.toString(), "en"))
+            list.add(Language("English", "en"))
+            list.add(Language("Русский", "ru"))
             return list
         }
     }

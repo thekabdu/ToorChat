@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Diaspora</string>
+    <string name="app_name">Toor Chat</string>
     <string name="loading">Пожалуйста подождите...</string>
     <string name="nav_item_qr">Сканировать QR</string>
     <string name="nav_item_main">Каталог</string>
@@ -44,7 +44,7 @@
     <string name="send_email">Отправить</string>
     <string name="receive_code">Вам не пришел код?</string>
     <string name="send_pin_again">Отправить заново</string>
-    <string name="write_pincode">Введите 4 значный код</string>
+    <string name="write_pincode">Введите 6 значный код из Почти</string>
     <string name="send_pin">Отправить</string>
     <string name="description">Описание</string>
     <string name="project_stage">Стадия проекта</string>
@@ -282,7 +282,7 @@
     <string name="channel_id" translatable="false">hardik-channel</string>
     <string name="channel_name" translatable="false">hardik</string>
     <string name="default_notification_channel_name">Diaspora</string>
-    <string name="welcome_to_the_world">Добро пожаловать в мир Diaspora</string>
+    <string name="welcome_to_the_world">Добро пожаловать</string>
     <string name="welcome_to_the_world_ru">Добро пожаловать в мир Diaspora</string>
     <string name="welcome_to_the_world_en">Welcome to the world of Diaspora</string>
     <string name="Next">Далее</string>
@@ -291,7 +291,7 @@
     <string name="this_platform_search">Это платформа для поиска и общения соотечественников за границей</string>
     <string name="splash_text_3">Здесь Вы можете найти земляков, оказать либо спросить совета или помощи, предложить свои услуги!</string>
     <string name="splash_text_4">Расстояние нас сближает!</string>
-    <string name="telephone_or_email">Номер телефона или адрес почты</string>
+    <string name="telephone_or_email">Адрес электронной почты</string>
     <string name="chose_where_u_from">Выберите \'Откуда Вы?\' и Ваше текущее \'Местоположение\'</string>
     <string name="no_chat">В этом регионе нету чатов</string>
     <string name="location">Местоположение</string>
@@ -303,4 +303,5 @@
     <string name="Contact_support">Написать в службу поддержки</string>
     <string name="Choose_your_language">Выберите ваш язык</string>
     <string name="choose_language">Выберите язык</string>
+    <string name="send_code_email">Отправить код</string>
 </resources>
